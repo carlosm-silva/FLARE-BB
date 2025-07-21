@@ -30,18 +30,19 @@ import pickle as pkl
 from datetime import datetime, timedelta
 from json import JSONDecodeError
 from time import sleep
-from typing import List, Tuple, Union
+from typing import Tuple, Union
 from warnings import warn
 
 import pyLCR
 from numba import jit
+from numba.typed import List as TypedList
 
 # The path to the cache folder
 cache_folder = os.path.join("data", "cache", "LCRs") + os.sep
 
 
 @jit(nopython=True, cache=True)
-def check_substr_in_list(substr: str, lst: List[str]) -> Tuple[bool, str]:
+def check_substr_in_list(substr: str, lst: TypedList[str]) -> Tuple[bool, str]:
     """
     Checks if a substring is in a list of strings. Returns the existence (bool) of the substring and the
     first string in the list that contains the substring, or "" if the substring is not in the list.
@@ -112,10 +113,10 @@ class CachedLightCurve(pyLCR.DataTools.LightCurve):
         self.lc: pyLCR.DataTools.LightCurve = None
 
         # Check if the cache file exists.
-        is_cached, self.file_name = check_substr_in_list(self.file_name, self.folder_files)
+        is_cached, self.file_name = check_substr_in_list(self.file_name, TypedList(self.folder_files))
         if not is_cached:
             self.folder_files = os.listdir(cache_folder)
-            is_cached, self.file_name = check_substr_in_list(self.file_name, self.folder_files)
+            is_cached, self.file_name = check_substr_in_list(self.file_name, TypedList(self.folder_files))
         if is_cached:
             try:
                 self.date = datetime.fromisoformat(self.file_name[-14:-4])
@@ -154,7 +155,7 @@ class CachedLightCurve(pyLCR.DataTools.LightCurve):
         """
         if self.date + self.expires > datetime.now() or not self.online:  # Check if the cache has expired.
             if not self.online:
-                warn(f"Online mode is off, but cache has expired. Using cache anyway. ({self.file_name})")
+                warn(f"Online mode is off, but cache has expired. Using cache anyway. ({self.file_name})", stacklevel=2)
             with open(os.path.join(cache_folder, self.file_name), "rb") as f:
                 self.load_from_lightcurve(pkl.load(f))
         else:

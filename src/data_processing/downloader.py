@@ -24,16 +24,22 @@ This script downloads the LCRs for all sources listed in the 4FGL-DR4 catalog wi
 """
 
 import os
-import pickle as pkl
+import sys
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime
 from json import JSONDecodeError
-from time import sleep
 
 import pandas as pd
 import pyLCR
 from astropy.table import Table
 from tqdm import tqdm
+
+# Handle both relative and absolute imports
+try:
+    from .caching import CachedLightCurve
+except ImportError:
+    # If relative import fails, try absolute import
+    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+    from caching import CachedLightCurve
 
 # The path to the cache folder
 cache_folder = os.path.join("data", "cache", "LCRs") + os.sep
@@ -56,54 +62,64 @@ def format_src_name(name: bytes) -> str:
 
 def download_cache_source(source: str, c_folder: str = cache_folder) -> None:
     """
-    Download all data associated with a source and save it to a cache folder.
+    Download all data associated with a source using CachedLightCurve objects.
+    The CachedLightCurve class handles caching, retries, and expiration automatically.
     :param source: The name of the source.
-    :param c_folder: The path to the cache folder.
+    :param c_folder: The path to the cache folder (unused now, but kept for compatibility).
     :return: None
     """
-    # Iterate through possible combinations of cadence, flux_type, index_type, and ts_min.
+    # Check if source is available in pyLCR.sources
     if source not in pyLCR.sources:
         return
+
+    # Iterate through possible combinations of cadence, flux_type, index_type, and ts_min.
     for cadence in ["daily", "weekly", "monthly"]:
         for flux_type in ["photon", "energy"]:
             for index_type in ["fixed", "free"]:
                 for ts_min in [4]:
-                    download_attempts = 0
-                    while download_attempts < 4:  # Try to download the data 4 times.
-                        if download_attempts > 0:  # If the download fails, wait 2^download_attempts seconds.
-                            sleep(2**download_attempts)
-                        try:
-                            lcr = pyLCR.getLightCurve(
-                                source, cadence=cadence, flux_type=flux_type, index_type=index_type, ts_min=ts_min
-                            )
-                            # If pyLCR catches an error, it will return a LightCurve object with source=None.
-                            if lcr is not None and lcr.source is not None:
-                                file_name = (
-                                    "_".join([source, cadence, flux_type, index_type, "tsmin" + str(ts_min)]) + ".pkl"
-                                )
-                                with open(os.path.join(c_folder, file_name), "wb") as f:
-                                    pkl.dump(lcr, f)
-                                break
-                        except JSONDecodeError:  # JSONDecodeError is raised when the request is invalid.
-                            break
-                        except IndexError as ie:
-                            # The error:
-                            # IndexError: too many indices for array: array is 1-dimensional, but 2 were index.
-                            # is raised when the source is empty.
-                            if "too many indices for array" in str(ie):
-                                print(f"Source {source} is empty. Skipping...")
-                                break
-                            else:
-                                raise ie
-                        except Exception as e:
-                            download_attempts += 1
+                    try:
+                        # Use CachedLightCurve which handles caching, downloads, and retries automatically
+                        CachedLightCurve(
+                            source=source,
+                            cadence=cadence,
+                            flux_type=flux_type,
+                            index_type=index_type,
+                            ts_min=ts_min,
+                            cache_uninitialized=True,
+                            online=True,
+                        )
+                        # If we get here, the light curve was successfully loaded/downloaded and cached
+
+                    except (JSONDecodeError, ValueError) as e:
+                        # JSONDecodeError: Invalid request from Fermi API
+                        # ValueError: Invalid parameters or source not in pyLCR.sources
+                        if "Source not found in pyLCR.sources" in str(e):
+                            return  # Source not available, skip all combinations
+                        else:
+                            break  # Invalid request, skip remaining combinations for this source
+                    except IndexError as ie:
+                        # Handle the specific case of empty sources
+                        if "too many indices for array" in str(ie):
                             print(
-                                f"[{str(datetime.now()).split('.')[0]}]"
-                                f"Download failed for {source} for {cadence} {flux_type} {index_type} {ts_min}\n"
-                                f"Raised error {e}\n",
+                                f"Source {source} {cadence} {flux_type} {index_type} {ts_min} is empty. Skipping...\n",
                                 end="",
                             )
-                            # end="" behaves better with multi-threading than \n
+                            return  # Source is empty, skip all combinations
+                        else:
+                            print(
+                                f"IndexError for {source} {cadence} {flux_type} {index_type} {ts_min}: {ie}\n", end=""
+                            )
+                    except (FileNotFoundError, RuntimeError) as e:
+                        # FileNotFoundError: Cache not found and online=False
+                        # RuntimeError: All download attempts failed
+                        print(
+                            f"Failed to process {source} for {cadence} {flux_type} {index_type} {ts_min}: {e}\n", end=""
+                        )
+                    except Exception as e:
+                        # Catch any other unexpected exceptions
+                        print(
+                            f"Unexpected error for {source} {cadence} {flux_type} {index_type} {ts_min}: {e}\n", end=""
+                        )
 
 
 if __name__ == "__main__":

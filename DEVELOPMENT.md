@@ -81,9 +81,112 @@ def example_function(param1: str, param2: int) -> bool:
     return True
 ```
 
-### License Header Template
+### Including Mathematical Formulas
 
-All Python files must start with this header:
+For scientific computing projects like FLARE-BB, you can include LaTeX-formatted mathematical formulas in your docstrings:
+
+#### Inline Math
+Use single backticks with math directive for inline formulas:
+
+```python
+def bayesian_blocks(data: np.ndarray) -> np.ndarray:
+    """
+    Apply Bayesian Blocks algorithm with fitness function :math:`F = N \log N - N`.
+    
+    The algorithm minimizes the cost function :math:`C = -F + \gamma` where 
+    :math:`\gamma` is the prior penalty term.
+    
+    :param data: Input time series data.
+    :return: Block edges array.
+    """
+    pass
+```
+
+#### Block Math
+Use the `.. math::` directive for displayed equations:
+
+```python
+def log_likelihood_ratio(n1: int, n2: int, t1: float, t2: float) -> float:
+    """
+    Calculate the log-likelihood ratio for two adjacent blocks.
+    
+    The log-likelihood ratio is computed as:
+    
+    .. math::
+        
+        \Lambda = 2 \left[ (n_1 + n_2) \log(n_1 + n_2) - n_1 \log n_1 - n_2 \log n_2 \right]
+        
+    where :math:`n_1` and :math:`n_2` are the photon counts in blocks 1 and 2.
+    
+    :param n1: Photon count in first block.
+    :param n2: Photon count in second block.
+    :param t1: Duration of first block.
+    :param t2: Duration of second block.
+    :return: Log-likelihood ratio value.
+    """
+    pass
+```
+
+#### Multi-line Equations
+For complex equations, use proper LaTeX alignment:
+
+```python
+def fitness_function(n: int, t: float) -> float:
+    """
+    Calculate the fitness function for a block.
+    
+    .. math::
+        
+        F(n, t) = \begin{cases}
+            n \log n - n & \text{if } n > 0 \\
+            0 & \text{if } n = 0
+        \end{cases}
+        
+    :param n: Number of events in the block.
+    :param t: Duration of the block.
+    :return: Fitness value.
+    """
+    pass
+```
+
+**Note**: When building documentation with Sphinx, ensure you have the `sphinx.ext.mathjax` extension enabled in your `conf.py` to properly render mathematical formulas.
+
+### License Header Templates
+
+Python files must include GPL license headers, but the format depends on the file type:
+
+#### For `__init__.py` Files (Comment Format)
+
+Use comment format to avoid cluttering generated documentation:
+
+```python
+# SPDX-License-Identifier: GPL-3.0-or-later
+# FLARE-BB – Bayesian Blocks algorithm for detecting gamma-ray flares
+# Copyright © 2025 Carlos Márcio de Oliveira e Silva Filho
+# Copyright © 2025 Ignacio Taboada
+#
+# This file is part of FLARE-BB.
+# FLARE-BB is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# FLARE-BB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file.  If not, see <https://www.gnu.org/licenses/>.
+
+"""
+Brief module description for documentation.
+"""
+```
+
+#### For Regular Module Files (Docstring Format)
+
+Use docstring format for individual module files:
 
 ```python
 """
@@ -138,7 +241,7 @@ ruff check src/ tests/ scripts/
 # Run type checking
 mypy src/
 
-# Check license headers
+# Check license headers (automatically handles both comment and docstring formats)
 python scripts/check_license_headers.py src/**/*.py
 ```
 

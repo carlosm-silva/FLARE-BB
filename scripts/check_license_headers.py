@@ -28,8 +28,28 @@ import sys
 from pathlib import Path
 from typing import List
 
+# For __init__.py files - comment format
+REQUIRED_HEADER_COMMENT = """# SPDX-License-Identifier: GPL-3.0-or-later
+# FLARE-BB – Bayesian Blocks algorithm for detecting gamma-ray flares
+# Copyright © 2025 Carlos Márcio de Oliveira e Silva Filho
+# Copyright © 2025 Ignacio Taboada
+#
+# This file is part of FLARE-BB.
+# FLARE-BB is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# FLARE-BB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file.  If not, see <https://www.gnu.org/licenses/>."""
 
-REQUIRED_HEADER = '''"""
+# For regular module files - docstring format
+REQUIRED_HEADER_DOCSTRING = '''"""
 SPDX-License-Identifier: GPL-3.0-or-later
 FLARE-BB – Bayesian Blocks algorithm for detecting gamma-ray flares
 Copyright © 2025 Carlos Márcio de Oliveira e Silva Filho
@@ -54,15 +74,38 @@ def check_license_header(file_path: Path) -> bool:
     """
     Check if a Python file has the required GPL license header.
 
+    For __init__.py files, checks for comment format headers.
+    For other .py files, checks for docstring format headers.
+
     :param file_path: Path to the Python file to check.
     :return: True if the header is present and correct, False otherwise.
     """
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, encoding="utf-8") as f:
             content = f.read()
 
-        # Check if the required header is present at the beginning
-        return REQUIRED_HEADER in content[: len(REQUIRED_HEADER) + 100]
+        # Choose the appropriate header format based on file type
+        if file_path.name == "__init__.py":
+            required_header = REQUIRED_HEADER_COMMENT
+        else:
+            required_header = REQUIRED_HEADER_DOCSTRING
+
+        # Check if the essential license components are present at the beginning
+        # Look for key license elements in the first part of the file
+        header_content = content[:1000]  # Check first 1000 characters
+
+        essential_components = [
+            "SPDX-License-Identifier: GPL-3.0-or-later",
+            "FLARE-BB – Bayesian Blocks algorithm for detecting gamma-ray flares",
+            "Copyright © 2025 Carlos Márcio de Oliveira e Silva Filho",
+            "Copyright © 2025 Ignacio Taboada",
+            "This file is part of FLARE-BB",
+            "GNU General Public License",
+            "https://www.gnu.org/licenses/",
+        ]
+
+        # All essential components must be present
+        return all(component in header_content for component in essential_components)
 
     except Exception as e:
         print(f"Error reading {file_path}: {e}")

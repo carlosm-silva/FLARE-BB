@@ -16,15 +16,19 @@ FLARE-BB is a scientific Python package that implements the Bayesian Blocks algo
 in Fermi-LAT light curves. The package provides tools for:
 
 * **Data Processing**: Efficient caching and downloading of Fermi-LAT Light Curve Repository data
+* **KDE Analysis**: Advanced Kernel Density Estimation for flux-error relationship analysis in blazar light curves
 * **Bayesian Analysis**: Implementation of the Bayesian Blocks algorithm for change-point detection
 * **Statistical Methods**: Advanced statistical tools for gamma-ray astronomy
 * **Simulation**: Tools for generating and analyzing synthetic light curves
+* **Usage Scripts**: Complete workflows and examples for real-world blazar analysis
 
 Key Features
 ------------
 
 * **High Performance**: Optimized with Numba for fast computation
 * **Flexible Caching**: Smart caching system for Fermi-LAT data with automatic expiration
+* **KDE Processing**: Sophisticated kernel density estimation with parameter-encoded filenames
+* **Real Data Integration**: Seamless integration with Fermi-LAT 4FGL catalog and pyLCR
 * **Type Safety**: Full type hints for better code reliability
 * **Scientific Documentation**: LaTeX-formatted mathematical formulas in docstrings
 * **GPL Licensed**: Open source with strong copyleft protection
@@ -46,6 +50,28 @@ Quick Start
    # Access the light curve data
    print(f"Source: {lc.source}")
    print(f"Number of data points: {len(lc.met)}")
+
+KDE Analysis Quick Start
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+   # Generate KDE data from real blazar light curves
+   python scripts/generate_kde.py
+
+   # Examine the generated KDE file
+   python scripts/kde_data_example.py
+
+   # Explore parameter combinations
+   python scripts/generate_kde.py --batch
+
+.. code-block:: python
+
+   # Load KDE data with metadata
+   from data_processing.kde_generator import load_kde_data_with_metadata
+
+   kde_data, points, values, metadata = load_kde_data_with_metadata(filepath)
+   params = metadata['kde_parameters']
 
 Mathematical Foundation
 -----------------------
@@ -69,6 +95,17 @@ The algorithm minimizes the global cost function:
 
 where :math:`\gamma` is the prior penalty term and :math:`N_{blocks}` is the number of blocks.
 
+KDE Mathematical Foundation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The KDE analysis uses Gaussian kernel density estimation for 2D flux-error relationships:
+
+.. math::
+
+   \hat{f}(x, y) = \frac{1}{nh^2} \sum_{i=1}^{n} K\left(\frac{x - x_i}{h}, \frac{y - y_i}{h}\right)
+
+where :math:`K` is the Gaussian kernel, :math:`h` is the bandwidth, and :math:`(x_i, y_i)` are the flux-error data points in log space.
+
 API Documentation
 -----------------
 
@@ -80,6 +117,13 @@ API Documentation
    api/bayesian_blocks
    api/simulation
    api/utils
+   api/scripts
+
+.. toctree::
+   :maxdepth: 1
+   :caption: User Guides:
+
+   kde_workflow
 
 .. toctree::
    :maxdepth: 1
@@ -114,6 +158,8 @@ Dependencies
 * Astropy
 * pyLCR
 * tqdm
+* h5py (for KDE data storage)
+* scipy (for KDE computation)
 
 Development Setup
 -----------------

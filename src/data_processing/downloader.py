@@ -38,8 +38,8 @@ try:
     from .caching import CachedLightCurve
 except ImportError:
     # If relative import fails, try absolute import
-    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-    from caching import CachedLightCurve
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from data_processing.caching import CachedLightCurve
 
 # The path to the cache folder
 cache_folder = os.path.join("data", "cache", "LCRs") + os.sep

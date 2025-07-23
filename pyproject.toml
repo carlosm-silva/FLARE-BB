@@ -20,6 +20,8 @@ dependencies = [
     "pandas",
     "tqdm",
     "pyLCR",
+    "h5py",
+    "scipy",
 ]
 
 [tool.black]
@@ -116,4 +118,4 @@ max-complexity = 10
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
-python_functions = ["test_*"] 
+python_functions = ["test_*"]

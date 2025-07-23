@@ -1,0 +1,8 @@
+---
+alwaysApply: true
+---
+
+To run python files in the terminal, the following syntax is required to ensure the file will run on the correct environment:
+```
+& C:/Users/Carlos/anaconda3/envs/scientific_general/python.exe c:/Users/Carlos/CursorProjects/FLARE-BB/scripts/generate_kde.py
+```

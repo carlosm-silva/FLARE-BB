@@ -42,7 +42,7 @@ cache_folder = os.path.join("data", "cache", "LCRs") + os.sep
 
 
 @jit(nopython=True, cache=True)
-def check_substr_in_list(substr: str, lst: TypedList[str]) -> Tuple[bool, str]:
+def check_substr_in_list_v2(substr: str, lst: TypedList[str]) -> Tuple[bool, str]:
     """
     Checks if a substring is in a list of strings. Returns the existence (bool) of the substring and the
     first string in the list that contains the substring, or "" if the substring is not in the list.
@@ -113,10 +113,10 @@ class CachedLightCurve(pyLCR.DataTools.LightCurve):
         self.lc: pyLCR.DataTools.LightCurve = None
 
         # Check if the cache file exists.
-        is_cached, self.file_name = check_substr_in_list(self.file_name, TypedList(self.folder_files))
+        is_cached, self.file_name = check_substr_in_list_v2(self.file_name, TypedList(self.folder_files))
         if not is_cached:
             self.folder_files = os.listdir(cache_folder)
-            is_cached, self.file_name = check_substr_in_list(self.file_name, TypedList(self.folder_files))
+            is_cached, self.file_name = check_substr_in_list_v2(self.file_name, TypedList(self.folder_files))
         if is_cached:
             try:
                 self.date = datetime.fromisoformat(self.file_name[-14:-4])

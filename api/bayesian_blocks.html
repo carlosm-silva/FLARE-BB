@@ -1,0 +1,277 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bayesian Blocks &mdash; FLARE-BB v1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=52f431ec" />
+
+  
+    <link rel="canonical" href="https://carlosfilho3.github.io/FLARE-BB/api/bayesian_blocks.html" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]], "processEscapes": true, "processEnvironments": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore", "processHtmlClass": "tex2jax_process"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Simulation" href="simulation.html" />
+    <link rel="prev" title="Data Processing" href="data_processing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FLARE-BB
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="data_processing.html">Data Processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data_processing.html#module-data_processing.caching">Caching Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_processing.html#data_processing.caching.check_substr_in_list_v2"><code class="docutils literal notranslate"><span class="pre">check_substr_in_list_v2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_processing.html#data_processing.caching.CachedLightCurve"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="data_processing.html#data_processing.caching.CachedLightCurve.folder_files"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.folder_files</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_processing.html#data_processing.caching.CachedLightCurve.__init__"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_processing.html#data_processing.caching.CachedLightCurve.get_cache_filename"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.get_cache_filename()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_processing.html#data_processing.caching.CachedLightCurve.load_from_lightcurve"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.load_from_lightcurve()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_processing.html#data_processing.caching.CachedLightCurve.load_from_cache"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.load_from_cache()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_processing.html#data_processing.caching.CachedLightCurve.load_from_lat_lcr"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.load_from_lat_lcr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_processing.html#data_processing.caching.CachedLightCurve.save_to_cache"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.save_to_cache()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="data_processing.html#key-classes">Key Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="data_processing.html#id0"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="data_processing.html#key-functions">Key Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="data_processing.html#id8"><code class="docutils literal notranslate"><span class="pre">check_substr_in_list_v2()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data_processing.html#downloader-module">Downloader Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_processing.html#kde-generator-module">KDE Generator Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_processing.html#id9">Key Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_processing.html#helper-functions">Helper Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data_processing.html#kde-utilities-module">KDE Utilities Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="data_processing.html#id10">Key Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Bayesian Blocks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#algorithm-implementation">Algorithm Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="simulation.html">Simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="simulation.html#synthetic-data-generation">Synthetic Data Generation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#helper-functions">Helper Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts and Usage Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scripts.html#architecture">Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#kde-generation-scripts">KDE Generation Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scripts.html#generate-kde-py">generate_kde.py</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="scripts.html#parameter-encoded-filenames">Parameter-Encoded Filenames</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="scripts.html#kde-data-example-py">kde_data_example.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripts.html#demo-kde-filenames-py">demo_kde_filenames.py</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#data-flow">Data Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#available-parameters">Available Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#data-format">Data Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#integration-with-core-library">Integration with Core Library</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guides:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../kde_workflow.html">KDE Workflow Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kde_workflow.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kde_workflow.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kde_workflow.html#step-by-step-workflow">Step-by-Step Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#step-1-basic-kde-generation">Step 1: Basic KDE Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#step-2-examine-generated-data">Step 2: Examine Generated Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#step-3-parameter-exploration">Step 3: Parameter Exploration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#step-4-batch-processing">Step 4: Batch Processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#step-5-data-analysis">Step 5: Data Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../kde_workflow.html#parameter-reference">Parameter Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#understanding-key-parameters">Understanding Key Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../kde_workflow.html#advanced-usage">Advanced Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#custom-analysis-workflows">Custom Analysis Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#file-management">File Management</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../kde_workflow.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#common-issues-and-solutions">Common Issues and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#performance-optimization">Performance Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../kde_workflow.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development.html#quick-reference">Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development.html#code-standards">Code Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development.html#mathematical-documentation">Mathematical Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#xx">[1.0.0] - 2025-01-XX</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#added">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#infrastructure">Infrastructure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#unreleased">Unreleased</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing to FLARE-BB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#types-of-contributions">Types of Contributions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#code-contributions">Code Contributions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#scientific-contributions">Scientific Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#development-workflow">Development Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#code-standards">Code Standards</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#formatting">Formatting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#documentation">Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#review-process">Review Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#contact">Contact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#license">License</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FLARE-BB</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Bayesian Blocks</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/bayesian_blocks.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bayesian-blocks">
+<h1>Bayesian Blocks<a class="headerlink" href="#bayesian-blocks" title="Link to this heading"></a></h1>
+<p>This module implements the Bayesian Blocks algorithm for detecting change points in time series data,
+specifically optimized for gamma-ray light curves.</p>
+<p id="module-bayesian_blocks">Bayesian Blocks module for detecting change points in gamma-ray light curves.</p>
+<p>This module implements the Bayesian Blocks algorithm for optimal segmentation
+of time series data, specifically optimized for gamma-ray astronomy applications.</p>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading"></a></h2>
+<p>The Bayesian Blocks algorithm segments time series data by finding the optimal partitioning that
+balances model complexity with data fidelity. The algorithm uses a fitness function to evaluate
+different segmentations:</p>
+<div class="math notranslate nohighlight">
+\[F_i = n_i \log n_i - n_i\]</div>
+<p>where <span class="math notranslate nohighlight">\(n_i\)</span> is the number of events in block <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>The total cost function to minimize is:</p>
+<div class="math notranslate nohighlight">
+\[C = -\sum_{i=1}^{N} F_i + \gamma \cdot N\]</div>
+<p>where <span class="math notranslate nohighlight">\(N\)</span> is the number of blocks and <span class="math notranslate nohighlight">\(\gamma\)</span> is a penalty term that controls
+the trade-off between model complexity and goodness of fit.</p>
+</section>
+<section id="algorithm-implementation">
+<h2>Algorithm Implementation<a class="headerlink" href="#algorithm-implementation" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This module will contain the core Bayesian Blocks implementation. The specific classes
+and functions will be documented here once the implementation is complete.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="data_processing.html" class="btn btn-neutral float-left" title="Data Processing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="simulation.html" class="btn btn-neutral float-right" title="Simulation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Carlos Márcio de Oliveira e Silva Filho, Ignacio Taboada.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

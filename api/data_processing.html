@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Processing &mdash; FLARE-BB v1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=52f431ec" />
+
+  
+    <link rel="canonical" href="https://carlosfilho3.github.io/FLARE-BB/api/data_processing.html" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Bayesian Blocks" href="bayesian_blocks.html" />
+    <link rel="prev" title="FLARE-BB Documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FLARE-BB
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-data_processing.caching">Caching Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data_processing.caching.check_substr_in_list_v2"><code class="docutils literal notranslate"><span class="pre">check_substr_in_list_v2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data_processing.caching.CachedLightCurve"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#data_processing.caching.CachedLightCurve.folder_files"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.folder_files</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data_processing.caching.CachedLightCurve.__init__"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data_processing.caching.CachedLightCurve.get_cache_filename"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.get_cache_filename()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data_processing.caching.CachedLightCurve.load_from_lightcurve"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.load_from_lightcurve()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data_processing.caching.CachedLightCurve.load_from_cache"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.load_from_cache()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data_processing.caching.CachedLightCurve.load_from_lat_lcr"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.load_from_lat_lcr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data_processing.caching.CachedLightCurve.save_to_cache"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.save_to_cache()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#key-classes">Key Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#key-functions">Key Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8"><code class="docutils literal notranslate"><span class="pre">check_substr_in_list_v2()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#downloader-module">Downloader Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kde-generator-module">KDE Generator Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Key Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#helper-functions">Helper Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#kde-utilities-module">KDE Utilities Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Key Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bayesian_blocks.html">Bayesian Blocks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bayesian_blocks.html#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayesian_blocks.html#algorithm-implementation">Algorithm Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="simulation.html">Simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="simulation.html#synthetic-data-generation">Synthetic Data Generation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#helper-functions">Helper Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts and Usage Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scripts.html#architecture">Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#kde-generation-scripts">KDE Generation Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scripts.html#generate-kde-py">generate_kde.py</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="scripts.html#parameter-encoded-filenames">Parameter-Encoded Filenames</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="scripts.html#kde-data-example-py">kde_data_example.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scripts.html#demo-kde-filenames-py">demo_kde_filenames.py</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#data-flow">Data Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#available-parameters">Available Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#data-format">Data Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#integration-with-core-library">Integration with Core Library</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guides:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../kde_workflow.html">KDE Workflow Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kde_workflow.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kde_workflow.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kde_workflow.html#step-by-step-workflow">Step-by-Step Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#step-1-basic-kde-generation">Step 1: Basic KDE Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#step-2-examine-generated-data">Step 2: Examine Generated Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#step-3-parameter-exploration">Step 3: Parameter Exploration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#step-4-batch-processing">Step 4: Batch Processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#step-5-data-analysis">Step 5: Data Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../kde_workflow.html#parameter-reference">Parameter Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#understanding-key-parameters">Understanding Key Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../kde_workflow.html#advanced-usage">Advanced Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#custom-analysis-workflows">Custom Analysis Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#file-management">File Management</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../kde_workflow.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#common-issues-and-solutions">Common Issues and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../kde_workflow.html#performance-optimization">Performance Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../kde_workflow.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development.html#quick-reference">Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development.html#code-standards">Code Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development.html#mathematical-documentation">Mathematical Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#xx">[1.0.0] - 2025-01-XX</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#added">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../changelog.html#infrastructure">Infrastructure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#unreleased">Unreleased</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing to FLARE-BB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#types-of-contributions">Types of Contributions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#code-contributions">Code Contributions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#scientific-contributions">Scientific Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#development-workflow">Development Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#code-standards">Code Standards</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#formatting">Formatting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#documentation">Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#review-process">Review Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#contact">Contact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#license">License</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FLARE-BB</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Data Processing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/data_processing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-processing">
+<h1>Data Processing<a class="headerlink" href="#data-processing" title="Link to this heading"></a></h1>
+<p>This module contains tools for downloading, caching, and processing Fermi-LAT light curve data,
+including advanced KDE (Kernel Density Estimation) functionality for flux-error analysis.</p>
+<section id="module-data_processing.caching">
+<span id="caching-module"></span><h2>Caching Module<a class="headerlink" href="#module-data_processing.caching" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="data_processing.caching.check_substr_in_list_v2">
+<span class="sig-prename descclassname"><span class="pre">data_processing.caching.</span></span><span class="sig-name descname"><span class="pre">check_substr_in_list_v2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">substr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lst</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#check_substr_in_list_v2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_processing.caching.check_substr_in_list_v2" title="Link to this definition"></a></dt>
+<dd><p>Checks if a substring is in a list of strings. Returns the existence (bool) of the substring and the
+first string in the list that contains the substring, or “” if the substring is not in the list.
+:param substr: The substring to search for.
+:param lst: The list of strings to search.
+:return:</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="data_processing.caching.CachedLightCurve">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_processing.caching.</span></span><span class="sig-name descname"><span class="pre">CachedLightCurve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#CachedLightCurve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_processing.caching.CachedLightCurve" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LightCurve</span></code></p>
+<p>Extension of pyLCR.DataTools.LightCurve that adds the ability to cache light curves to disk.
+For more info on pyLCR see <a class="reference external" href="https://github.com/dankocevski/pyLCR">https://github.com/dankocevski/pyLCR</a>.</p>
+<dl class="field-list simple">
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="data_processing.caching.CachedLightCurve.folder_files">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">folder_files</span></span><a class="headerlink" href="#data_processing.caching.CachedLightCurve.folder_files" title="Link to this definition"></a></dt>
+<dd><p>Get the list of files in the cache folder.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="data_processing.caching.CachedLightCurve.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cadence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'daily'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flux_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'photon'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fixed'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_uninitialized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">online</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expires</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">datetime.timedelta(days=900000)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#CachedLightCurve.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_processing.caching.CachedLightCurve.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize a CachedLightCurve object.
+:param source: The name of the source.
+:param cadence: The cadence of the light curve.
+:param flux_type: The flux type of the light curve.
+:param index_type: The index type of the light curve.
+:param ts_min: The ts_min of the light curve.
+:param cache_uninitialized: Whether to cache the light curve if it has not been cached before.
+:param online: Whether to download the light curve if it has not been downloaded before or if the cache has
+expired.
+:param expires: The time after which the cache expires. If the cache is older than this, it will be deleted.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="data_processing.caching.CachedLightCurve.get_cache_filename">
+<span class="sig-name descname"><span class="pre">get_cache_filename</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#CachedLightCurve.get_cache_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_processing.caching.CachedLightCurve.get_cache_filename" title="Link to this definition"></a></dt>
+<dd><p>Get the filename of the cache file for this light curve.
+:return: The filename of the cache file for this light curve.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="data_processing.caching.CachedLightCurve.load_from_lightcurve">
+<span class="sig-name descname"><span class="pre">load_from_lightcurve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#CachedLightCurve.load_from_lightcurve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_processing.caching.CachedLightCurve.load_from_lightcurve" title="Link to this definition"></a></dt>
+<dd><p>Load the data from a pyLCR.DataTools.LightCurve object into this CachedLightCurve object.
+:param lc: The pyLCR.DataTools.LightCurve object to load data from.
+:return: None</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="data_processing.caching.CachedLightCurve.load_from_cache">
+<span class="sig-name descname"><span class="pre">load_from_cache</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#CachedLightCurve.load_from_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_processing.caching.CachedLightCurve.load_from_cache" title="Link to this definition"></a></dt>
+<dd><p>Load the data from the cache file into this CachedLightCurve object.
+:return: None</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="data_processing.caching.CachedLightCurve.load_from_lat_lcr">
+<span class="sig-name descname"><span class="pre">load_from_lat_lcr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#CachedLightCurve.load_from_lat_lcr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_processing.caching.CachedLightCurve.load_from_lat_lcr" title="Link to this definition"></a></dt>
+<dd><p>Download the light curve from the Fermi LAT LCR database. Retries up to 5 times if the download fails.
+For more information on the Fermi LAT LCR database, see
+<a class="reference external" href="https://fermi.gsfc.nasa.gov/ssc/data/access/lat/LightCurveRepository/index.html">https://fermi.gsfc.nasa.gov/ssc/data/access/lat/LightCurveRepository/index.html</a>
+:return: None</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="data_processing.caching.CachedLightCurve.save_to_cache">
+<span class="sig-name descname"><span class="pre">save_to_cache</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#CachedLightCurve.save_to_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data_processing.caching.CachedLightCurve.save_to_cache" title="Link to this definition"></a></dt>
+<dd><p>Save the data to the cache file.
+:return: None</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<p>The caching module provides efficient storage and retrieval of light curve data from the
+Fermi-LAT Light Curve Repository.</p>
+<section id="key-classes">
+<h3>Key Classes<a class="headerlink" href="#key-classes" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_processing.caching.</span></span><span class="sig-name descname"><span class="pre">CachedLightCurve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#CachedLightCurve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LightCurve</span></code></p>
+<p>Extension of pyLCR.DataTools.LightCurve that adds the ability to cache light curves to disk.
+For more info on pyLCR see <a class="reference external" href="https://github.com/dankocevski/pyLCR">https://github.com/dankocevski/pyLCR</a>.</p>
+<dl class="field-list simple">
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="id1">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">folder_files</span></span><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd><p>Get the list of files in the cache folder.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cadence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'daily'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flux_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'photon'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fixed'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_uninitialized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">online</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expires</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">datetime.timedelta(days=900000)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#CachedLightCurve.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd><p>Initialize a CachedLightCurve object.
+:param source: The name of the source.
+:param cadence: The cadence of the light curve.
+:param flux_type: The flux type of the light curve.
+:param index_type: The index type of the light curve.
+:param ts_min: The ts_min of the light curve.
+:param cache_uninitialized: Whether to cache the light curve if it has not been cached before.
+:param online: Whether to download the light curve if it has not been downloaded before or if the cache has
+expired.
+:param expires: The time after which the cache expires. If the cache is older than this, it will be deleted.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">get_cache_filename</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#CachedLightCurve.get_cache_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd><p>Get the filename of the cache file for this light curve.
+:return: The filename of the cache file for this light curve.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">load_from_lightcurve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#CachedLightCurve.load_from_lightcurve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd><p>Load the data from a pyLCR.DataTools.LightCurve object into this CachedLightCurve object.
+:param lc: The pyLCR.DataTools.LightCurve object to load data from.
+:return: None</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">load_from_cache</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#CachedLightCurve.load_from_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd><p>Load the data from the cache file into this CachedLightCurve object.
+:return: None</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">load_from_lat_lcr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#CachedLightCurve.load_from_lat_lcr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd><p>Download the light curve from the Fermi LAT LCR database. Retries up to 5 times if the download fails.
+For more information on the Fermi LAT LCR database, see
+<a class="reference external" href="https://fermi.gsfc.nasa.gov/ssc/data/access/lat/LightCurveRepository/index.html">https://fermi.gsfc.nasa.gov/ssc/data/access/lat/LightCurveRepository/index.html</a>
+:return: None</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">save_to_cache</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#CachedLightCurve.save_to_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
+<dd><p>Save the data to the cache file.
+:return: None</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="key-functions">
+<h3>Key Functions<a class="headerlink" href="#key-functions" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-prename descclassname"><span class="pre">data_processing.caching.</span></span><span class="sig-name descname"><span class="pre">check_substr_in_list_v2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">substr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lst</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/data_processing/caching.html#check_substr_in_list_v2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
+<dd><p>Checks if a substring is in a list of strings. Returns the existence (bool) of the substring and the
+first string in the list that contains the substring, or “” if the substring is not in the list.
+:param substr: The substring to search for.
+:param lst: The list of strings to search.
+:return:</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="downloader-module">
+<h2>Downloader Module<a class="headerlink" href="#downloader-module" title="Link to this heading"></a></h2>
+<p>The downloader module handles bulk downloading of light curves from the Fermi-LAT database.</p>
+</section>
+<section id="kde-generator-module">
+<h2>KDE Generator Module<a class="headerlink" href="#kde-generator-module" title="Link to this heading"></a></h2>
+<p>The KDE generator module provides sophisticated kernel density estimation for analyzing
+flux-error relationships in blazar light curves. It includes comprehensive parameter
+management, file naming conventions, and metadata storage.</p>
+<section id="id9">
+<h3>Key Functions<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+</section>
+<section id="helper-functions">
+<h3>Helper Functions<a class="headerlink" href="#helper-functions" title="Link to this heading"></a></h3>
+</section>
+</section>
+<section id="kde-utilities-module">
+<h2>KDE Utilities Module<a class="headerlink" href="#kde-utilities-module" title="Link to this heading"></a></h2>
+<p>The KDE utilities module provides tools for managing, examining, and analyzing KDE data files.
+It includes functions for file discovery, parameter comparison, and data integrity checking.</p>
+<section id="id10">
+<h3>Key Functions<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="FLARE-BB Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bayesian_blocks.html" class="btn btn-neutral float-right" title="Bayesian Blocks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Carlos Márcio de Oliveira e Silva Filho, Ignacio Taboada.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,500 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>data_processing.caching &mdash; FLARE-BB v1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=52f431ec" />
+
+  
+    <link rel="canonical" href="https://carlosfilho3.github.io/FLARE-BB/_modules/data_processing/caching.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            FLARE-BB
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/data_processing.html">Data Processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/data_processing.html#module-data_processing.caching">Caching Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/data_processing.html#data_processing.caching.check_substr_in_list_v2"><code class="docutils literal notranslate"><span class="pre">check_substr_in_list_v2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/data_processing.html#data_processing.caching.CachedLightCurve"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/data_processing.html#data_processing.caching.CachedLightCurve.folder_files"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.folder_files</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/data_processing.html#data_processing.caching.CachedLightCurve.__init__"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/data_processing.html#data_processing.caching.CachedLightCurve.get_cache_filename"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.get_cache_filename()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/data_processing.html#data_processing.caching.CachedLightCurve.load_from_lightcurve"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.load_from_lightcurve()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/data_processing.html#data_processing.caching.CachedLightCurve.load_from_cache"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.load_from_cache()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/data_processing.html#data_processing.caching.CachedLightCurve.load_from_lat_lcr"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.load_from_lat_lcr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/data_processing.html#data_processing.caching.CachedLightCurve.save_to_cache"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.save_to_cache()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/data_processing.html#key-classes">Key Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/data_processing.html#id0"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/data_processing.html#key-functions">Key Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/data_processing.html#id8"><code class="docutils literal notranslate"><span class="pre">check_substr_in_list_v2()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/data_processing.html#downloader-module">Downloader Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/data_processing.html#kde-generator-module">KDE Generator Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/data_processing.html#id9">Key Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/data_processing.html#helper-functions">Helper Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/data_processing.html#kde-utilities-module">KDE Utilities Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/data_processing.html#id10">Key Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/bayesian_blocks.html">Bayesian Blocks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/bayesian_blocks.html#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/bayesian_blocks.html#algorithm-implementation">Algorithm Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/simulation.html">Simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/simulation.html#synthetic-data-generation">Synthetic Data Generation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/utils.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/utils.html#helper-functions">Helper Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/scripts.html">Scripts and Usage Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/scripts.html#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/scripts.html#architecture">Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/scripts.html#kde-generation-scripts">KDE Generation Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/scripts.html#generate-kde-py">generate_kde.py</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/scripts.html#parameter-encoded-filenames">Parameter-Encoded Filenames</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/scripts.html#kde-data-example-py">kde_data_example.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/scripts.html#demo-kde-filenames-py">demo_kde_filenames.py</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/scripts.html#data-flow">Data Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/scripts.html#available-parameters">Available Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/scripts.html#data-format">Data Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/scripts.html#integration-with-core-library">Integration with Core Library</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guides:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../kde_workflow.html">KDE Workflow Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../kde_workflow.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../kde_workflow.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../kde_workflow.html#step-by-step-workflow">Step-by-Step Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../kde_workflow.html#step-1-basic-kde-generation">Step 1: Basic KDE Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kde_workflow.html#step-2-examine-generated-data">Step 2: Examine Generated Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kde_workflow.html#step-3-parameter-exploration">Step 3: Parameter Exploration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kde_workflow.html#step-4-batch-processing">Step 4: Batch Processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kde_workflow.html#step-5-data-analysis">Step 5: Data Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../kde_workflow.html#parameter-reference">Parameter Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../kde_workflow.html#understanding-key-parameters">Understanding Key Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../kde_workflow.html#advanced-usage">Advanced Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../kde_workflow.html#custom-analysis-workflows">Custom Analysis Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kde_workflow.html#file-management">File Management</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../kde_workflow.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../kde_workflow.html#common-issues-and-solutions">Common Issues and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../kde_workflow.html#performance-optimization">Performance Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../kde_workflow.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../development.html#quick-reference">Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development.html#code-standards">Code Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development.html#mathematical-documentation">Mathematical Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#xx">[1.0.0] - 2025-01-XX</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#added">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#infrastructure">Infrastructure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#unreleased">Unreleased</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing to FLARE-BB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#types-of-contributions">Types of Contributions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#code-contributions">Code Contributions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#scientific-contributions">Scientific Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#development-workflow">Development Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#code-standards">Code Standards</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#formatting">Formatting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#documentation">Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#review-process">Review Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#contact">Contact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#license">License</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FLARE-BB</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">data_processing.caching</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for data_processing.caching</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-License-Identifier: GPL-3.0-or-later</span>
+<span class="c1"># FLARE-BB – Bayesian Blocks algorithm for detecting gamma-ray flares</span>
+<span class="c1"># Copyright © 2025 Carlos Márcio de Oliveira e Silva Filho</span>
+<span class="c1"># Copyright © 2025 Ignacio Taboada</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of FLARE-BB.</span>
+<span class="c1"># FLARE-BB is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># FLARE-BB is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this file.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span class="c1">#</span>
+<span class="c1"># ------------------------------------------------------------------------------------------------------------------------</span>
+<span class="c1">#</span>
+<span class="c1"># Warning: The class implemented in this file uses Python&#39;s pickle module to cache light curves. Therefore, it is subject</span>
+<span class="c1"># to the same security risks as pickle. See https://docs.python.org/3/library/pickle.html#security-and-pickle for more</span>
+<span class="c1"># info.</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pkl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">JSONDecodeError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyLCR</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">jit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba.typed</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span> <span class="k">as</span> <span class="n">TypedList</span>
+
+<span class="c1"># The path to the cache folder</span>
+<span class="n">cache_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;cache&quot;</span><span class="p">,</span> <span class="s2">&quot;LCRs&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span>
+
+
+<div class="viewcode-block" id="check_substr_in_list_v2">
+<a class="viewcode-back" href="../../api/data_processing.html#data_processing.caching.check_substr_in_list_v2">[docs]</a>
+<span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_substr_in_list_v2</span><span class="p">(</span><span class="n">substr</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="n">TypedList</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks if a substring is in a list of strings. Returns the existence (bool) of the substring and the</span>
+<span class="sd">    first string in the list that contains the substring, or &quot;&quot; if the substring is not in the list.</span>
+<span class="sd">    :param substr: The substring to search for.</span>
+<span class="sd">    :param lst: The list of strings to search.</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">default_return</span> <span class="o">=</span> <span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">substr</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">item</span>
+    <span class="k">return</span> <span class="n">default_return</span></div>
+
+
+
+<div class="viewcode-block" id="CachedLightCurve">
+<a class="viewcode-back" href="../../api/data_processing.html#data_processing.caching.CachedLightCurve">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CachedLightCurve</span><span class="p">(</span><span class="n">pyLCR</span><span class="o">.</span><span class="n">DataTools</span><span class="o">.</span><span class="n">LightCurve</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extension of pyLCR.DataTools.LightCurve that adds the ability to cache light curves to disk.</span>
+<span class="sd">    For more info on pyLCR see https://github.com/dankocevski/pyLCR.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">folder_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the list of files in the cache folder.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">cache_folder</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="CachedLightCurve.__init__">
+<a class="viewcode-back" href="../../api/data_processing.html#data_processing.caching.CachedLightCurve.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">cadence</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;daily&quot;</span><span class="p">,</span>
+        <span class="n">flux_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;photon&quot;</span><span class="p">,</span>
+        <span class="n">index_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;fixed&quot;</span><span class="p">,</span>
+        <span class="n">ts_min</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">cache_uninitialized</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">online</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">expires</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">timedelta</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mf">9e5</span><span class="p">),</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a CachedLightCurve object.</span>
+<span class="sd">        :param source: The name of the source.</span>
+<span class="sd">        :param cadence: The cadence of the light curve.</span>
+<span class="sd">        :param flux_type: The flux type of the light curve.</span>
+<span class="sd">        :param index_type: The index type of the light curve.</span>
+<span class="sd">        :param ts_min: The ts_min of the light curve.</span>
+<span class="sd">        :param cache_uninitialized: Whether to cache the light curve if it has not been cached before.</span>
+<span class="sd">        :param online: Whether to download the light curve if it has not been downloaded before or if the cache has</span>
+<span class="sd">        expired.</span>
+<span class="sd">        :param expires: The time after which the cache expires. If the cache is older than this, it will be deleted.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">source</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache_uninitialized</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">cache_uninitialized</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">online</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">online</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expires</span><span class="p">:</span> <span class="n">timedelta</span> <span class="o">=</span> <span class="n">expires</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expires</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">)</span> <span class="k">else</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">expires</span><span class="p">)</span>
+        <span class="c1"># Check if the source is in pyLCR.sources (which are sure to be on the LAT LCR database).</span>
+        <span class="k">if</span> <span class="n">online</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pyLCR</span><span class="o">.</span><span class="n">sources</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Source not found in pyLCR.sources. It might not be available in the Fermi database.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cadence</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">cadence</span>
+        <span class="k">if</span> <span class="n">online</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">cadence</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;daily&quot;</span><span class="p">,</span> <span class="s2">&quot;weekly&quot;</span><span class="p">,</span> <span class="s2">&quot;monthly&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid cadence. Must be one of &#39;daily&#39;, &#39;weekly&#39;, or &#39;monthly&#39;.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flux_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">flux_type</span>
+        <span class="k">if</span> <span class="n">online</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;photon&quot;</span><span class="p">,</span> <span class="s2">&quot;energy&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid flux_type. Must be one of &#39;photon&#39; or &#39;energy&#39;.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">index_type</span>
+        <span class="k">if</span> <span class="n">online</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">index_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;fixed&quot;</span><span class="p">,</span> <span class="s2">&quot;free&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid index_type. Must be one of &#39;fixed&#39; or &#39;free&#39;.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ts_min</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">ts_min</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cache_filename</span><span class="p">()</span>
+        <span class="c1"># noinspection PyTypeChecker</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lc</span><span class="p">:</span> <span class="n">pyLCR</span><span class="o">.</span><span class="n">DataTools</span><span class="o">.</span><span class="n">LightCurve</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Check if the cache file exists.</span>
+        <span class="n">is_cached</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span> <span class="o">=</span> <span class="n">check_substr_in_list_v2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">,</span> <span class="n">TypedList</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_files</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_cached</span><span class="p">:</span>
+            <span class="c1"># Refresh folder files list and check again</span>
+            <span class="n">is_cached</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span> <span class="o">=</span> <span class="n">check_substr_in_list_v2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">,</span> <span class="n">TypedList</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_files</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">is_cached</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">[</span><span class="o">-</span><span class="mi">14</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">])</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>  <span class="c1"># There is no date information in the file name.</span>
+                <span class="c1"># Get date from file creation time.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getctime</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cache_folder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">load_from_cache</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">online</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cache_filename</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.pkl&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">load_from_lat_lcr</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;Cache file not found.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CachedLightCurve.get_cache_filename">
+<a class="viewcode-back" href="../../api/data_processing.html#data_processing.caching.CachedLightCurve.get_cache_filename">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_cache_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the filename of the cache file for this light curve.</span>
+<span class="sd">        :return: The filename of the cache file for this light curve.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cadence</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">index_type</span><span class="p">,</span> <span class="s2">&quot;tsmin&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ts_min</span><span class="p">)])</span></div>
+
+
+<div class="viewcode-block" id="CachedLightCurve.load_from_lightcurve">
+<a class="viewcode-back" href="../../api/data_processing.html#data_processing.caching.CachedLightCurve.load_from_lightcurve">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_from_lightcurve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lc</span><span class="p">:</span> <span class="n">pyLCR</span><span class="o">.</span><span class="n">DataTools</span><span class="o">.</span><span class="n">LightCurve</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load the data from a pyLCR.DataTools.LightCurve object into this CachedLightCurve object.</span>
+<span class="sd">        :param lc: The pyLCR.DataTools.LightCurve object to load data from.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lc</span><span class="p">:</span> <span class="n">pyLCR</span><span class="o">.</span><span class="n">DataTools</span><span class="o">.</span><span class="n">LightCurve</span> <span class="o">=</span> <span class="n">lc</span>
+        <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">lc</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>  <span class="c1"># Iterate through all fields in the LightCurve object.</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CachedLightCurve.load_from_cache">
+<a class="viewcode-back" href="../../api/data_processing.html#data_processing.caching.CachedLightCurve.load_from_cache">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_from_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load the data from the cache file into this CachedLightCurve object.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">expires</span> <span class="o">&gt;</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">online</span><span class="p">:</span>  <span class="c1"># Check if the cache has expired.</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">online</span><span class="p">:</span>
+                <span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Online mode is off, but cache has expired. Using cache anyway. (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cache_folder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">load_from_lightcurve</span><span class="p">(</span><span class="n">pkl</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Delete the cache file if it has expired.</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cache_folder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cache_filename</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.pkl&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">load_from_lat_lcr</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="CachedLightCurve.load_from_lat_lcr">
+<a class="viewcode-back" href="../../api/data_processing.html#data_processing.caching.CachedLightCurve.load_from_lat_lcr">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_from_lat_lcr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Download the light curve from the Fermi LAT LCR database. Retries up to 5 times if the download fails.</span>
+<span class="sd">        For more information on the Fermi LAT LCR database, see</span>
+<span class="sd">        https://fermi.gsfc.nasa.gov/ssc/data/access/lat/LightCurveRepository/index.html</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">download_attempts</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">download_attempts</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">download_attempts</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Wait a bit in the event of a download failure. Waiting longer accounts for events such as a quick</span>
+                <span class="c1"># internet outage, connecting to a VPN, etc.</span>
+                <span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">download_attempts</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                This try block attempts to download the light curve from the Fermi LAT LCR database. The requests are</span>
+<span class="sd">                made using pyLCR.getLightCurve, which returns a pyLCR.DataTools.LightCurve object.</span>
+<span class="sd">                If the pyLCR.getLightCurve call fails, multiple outcomes are possible:</span>
+<span class="sd">                1. If a JSONDecodeError or IndexError is raised, Fermi LAT LCR raised an error or pyLCR failed to parse</span>
+<span class="sd">                    the data. In either case, we cannot download the light curve, so there&#39;s no point retrying.</span>
+<span class="sd">                2. If any other exception is raised, the download failed for some other reason. We retry up to 5 times.</span>
+<span class="sd">                3. If no exception is raised, but the pyLCR.getLightCurve call returns None, or a</span>
+<span class="sd">                    py.LCR.DataTools.LightCurve object with a None source, one of the following happened: this</span>
+<span class="sd">                    combination of source, cadence, flux_type, index_type, and ts_min is not available in the Fermi LAT</span>
+<span class="sd">                    LCR database, or pyLCR caught an exception and decided to print it instead of raising it. Some of</span>
+<span class="sd">                    the exceptions caught include exceptions related to connection error, therefore we should retry.</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lc</span><span class="p">:</span> <span class="n">pyLCR</span><span class="o">.</span><span class="n">DataTools</span><span class="o">.</span><span class="n">LightCurve</span> <span class="o">=</span> <span class="n">pyLCR</span><span class="o">.</span><span class="n">getLightCurve</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">,</span>
+                    <span class="n">cadence</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cadence</span><span class="p">,</span>
+                    <span class="n">flux_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">flux_type</span><span class="p">,</span>
+                    <span class="n">index_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">index_type</span><span class="p">,</span>
+                    <span class="n">ts_min</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ts_min</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="c1"># pyLCR catches some errors and returns None</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">lc</span><span class="o">.</span><span class="n">source</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">load_from_lightcurve</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lc</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_uninitialized</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">save_to_cache</span><span class="p">()</span>
+                    <span class="k">return</span>
+                <span class="c1"># Raise JsonDecodeError and Index Error. They imply something wrong with the data.</span>
+            <span class="k">except</span> <span class="p">(</span><span class="n">JSONDecodeError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">e</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">download_attempts</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Download failed for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="si">}</span><span class="s2"> for &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cadence</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">flux_type</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">index_type</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ts_min</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Raised error </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="c1"># end=&quot;&quot; behaves better with multi-threading than \n</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Download failed for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="si">}</span><span class="s2"> for &quot;</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cadence</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">flux_type</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">index_type</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ts_min</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CachedLightCurve.save_to_cache">
+<a class="viewcode-back" href="../../api/data_processing.html#data_processing.caching.CachedLightCurve.save_to_cache">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_to_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save the data to the cache file.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cache_folder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">),</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">pkl</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lc</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Carlos Márcio de Oliveira e Silva Filho, Ignacio Taboada.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

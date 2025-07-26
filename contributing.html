@@ -1,0 +1,437 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributing to FLARE-BB &mdash; FLARE-BB v1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=52f431ec" />
+
+  
+    <link rel="canonical" href="https://carlosfilho3.github.io/FLARE-BB/contributing.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Changelog" href="changelog.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            FLARE-BB
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/data_processing.html">Data Processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/data_processing.html#module-data_processing.caching">Caching Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data_processing.html#data_processing.caching.check_substr_in_list_v2"><code class="docutils literal notranslate"><span class="pre">check_substr_in_list_v2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data_processing.html#data_processing.caching.CachedLightCurve"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/data_processing.html#data_processing.caching.CachedLightCurve.folder_files"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.folder_files</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/data_processing.html#data_processing.caching.CachedLightCurve.__init__"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/data_processing.html#data_processing.caching.CachedLightCurve.get_cache_filename"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.get_cache_filename()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/data_processing.html#data_processing.caching.CachedLightCurve.load_from_lightcurve"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.load_from_lightcurve()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/data_processing.html#data_processing.caching.CachedLightCurve.load_from_cache"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.load_from_cache()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/data_processing.html#data_processing.caching.CachedLightCurve.load_from_lat_lcr"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.load_from_lat_lcr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/data_processing.html#data_processing.caching.CachedLightCurve.save_to_cache"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve.save_to_cache()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/data_processing.html#key-classes">Key Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/data_processing.html#id0"><code class="docutils literal notranslate"><span class="pre">CachedLightCurve</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/data_processing.html#key-functions">Key Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/data_processing.html#id8"><code class="docutils literal notranslate"><span class="pre">check_substr_in_list_v2()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_processing.html#downloader-module">Downloader Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_processing.html#kde-generator-module">KDE Generator Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data_processing.html#id9">Key Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data_processing.html#helper-functions">Helper Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data_processing.html#kde-utilities-module">KDE Utilities Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data_processing.html#id10">Key Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/bayesian_blocks.html">Bayesian Blocks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/bayesian_blocks.html#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/bayesian_blocks.html#algorithm-implementation">Algorithm Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/simulation.html">Simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/simulation.html#synthetic-data-generation">Synthetic Data Generation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/utils.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/utils.html#helper-functions">Helper Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/scripts.html">Scripts and Usage Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/scripts.html#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/scripts.html#architecture">Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/scripts.html#kde-generation-scripts">KDE Generation Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/scripts.html#generate-kde-py">generate_kde.py</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/scripts.html#parameter-encoded-filenames">Parameter-Encoded Filenames</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/scripts.html#kde-data-example-py">kde_data_example.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/scripts.html#demo-kde-filenames-py">demo_kde_filenames.py</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/scripts.html#data-flow">Data Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/scripts.html#available-parameters">Available Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/scripts.html#data-format">Data Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/scripts.html#integration-with-core-library">Integration with Core Library</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guides:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="kde_workflow.html">KDE Workflow Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kde_workflow.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kde_workflow.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kde_workflow.html#step-by-step-workflow">Step-by-Step Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kde_workflow.html#step-1-basic-kde-generation">Step 1: Basic KDE Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kde_workflow.html#step-2-examine-generated-data">Step 2: Examine Generated Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kde_workflow.html#step-3-parameter-exploration">Step 3: Parameter Exploration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kde_workflow.html#step-4-batch-processing">Step 4: Batch Processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kde_workflow.html#step-5-data-analysis">Step 5: Data Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kde_workflow.html#parameter-reference">Parameter Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kde_workflow.html#understanding-key-parameters">Understanding Key Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kde_workflow.html#advanced-usage">Advanced Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kde_workflow.html#custom-analysis-workflows">Custom Analysis Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kde_workflow.html#file-management">File Management</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kde_workflow.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kde_workflow.html#common-issues-and-solutions">Common Issues and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kde_workflow.html#performance-optimization">Performance Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kde_workflow.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="development.html#quick-reference">Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#code-standards">Code Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#mathematical-documentation">Mathematical Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#xx">[1.0.0] - 2025-01-XX</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#added">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#infrastructure">Infrastructure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#unreleased">Unreleased</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing to FLARE-BB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#types-of-contributions">Types of Contributions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#code-contributions">Code Contributions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scientific-contributions">Scientific Contributions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#development-workflow">Development Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-standards">Code Standards</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#formatting">Formatting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation">Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#review-process">Review Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contact">Contact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">FLARE-BB</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Contributing to FLARE-BB</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/contributing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="contributing-to-flare-bb">
+<h1>Contributing to FLARE-BB<a class="headerlink" href="#contributing-to-flare-bb" title="Link to this heading"></a></h1>
+<p>We welcome contributions to FLARE-BB! This guide outlines how to contribute effectively to the project.</p>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Fork the repository</strong> on GitHub</p></li>
+<li><p><strong>Clone your fork</strong> locally:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-username/FLARE-BB.git
+<span class="nb">cd</span><span class="w"> </span>FLARE-BB
+</pre></div>
+</div>
+</li>
+<li><p><strong>Set up the development environment</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate<span class="w">  </span><span class="c1"># On Windows: venv\Scripts\activate</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-dev.txt
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+pre-commit<span class="w"> </span>install
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="types-of-contributions">
+<h2>Types of Contributions<a class="headerlink" href="#types-of-contributions" title="Link to this heading"></a></h2>
+<section id="code-contributions">
+<h3>Code Contributions<a class="headerlink" href="#code-contributions" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Bug fixes</strong>: Help us identify and fix bugs</p></li>
+<li><p><strong>New features</strong>: Implement new functionality for the Bayesian Blocks algorithm</p></li>
+<li><p><strong>Performance improvements</strong>: Optimize existing code for better performance</p></li>
+<li><p><strong>Documentation</strong>: Improve docstrings, add examples, or fix documentation errors</p></li>
+</ul>
+</section>
+<section id="scientific-contributions">
+<h3>Scientific Contributions<a class="headerlink" href="#scientific-contributions" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Algorithm improvements</strong>: Enhance the Bayesian Blocks implementation</p></li>
+<li><p><strong>Validation studies</strong>: Compare results with other change-point detection methods</p></li>
+<li><p><strong>Example notebooks</strong>: Create Jupyter notebooks demonstrating usage</p></li>
+<li><p><strong>Test datasets</strong>: Contribute synthetic or real gamma-ray light curve datasets</p></li>
+</ul>
+</section>
+</section>
+<section id="development-workflow">
+<h2>Development Workflow<a class="headerlink" href="#development-workflow" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Create a feature branch</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/your-feature-name
+</pre></div>
+</div>
+</li>
+<li><p><strong>Make your changes</strong> following our coding standards:</p>
+<ul class="simple">
+<li><p>Use <strong>120-character line length</strong></p></li>
+<li><p>Add <strong>type hints</strong> to all functions</p></li>
+<li><p>Include <strong>Sphinx-style docstrings</strong> with mathematical formulas</p></li>
+<li><p>Add <strong>GPL license headers</strong> to new files</p></li>
+</ul>
+</li>
+<li><p><strong>Test your changes</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run formatting and linting</span>
+pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
+
+<span class="c1"># Run tests (when available)</span>
+pytest<span class="w"> </span>tests/
+</pre></div>
+</div>
+</li>
+<li><p><strong>Commit your changes</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add descriptive commit message&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Push to your fork</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feature/your-feature-name
+</pre></div>
+</div>
+</li>
+<li><p><strong>Create a pull request</strong> on GitHub</p></li>
+</ol>
+</section>
+<section id="code-standards">
+<h2>Code Standards<a class="headerlink" href="#code-standards" title="Link to this heading"></a></h2>
+<section id="formatting">
+<h3>Formatting<a class="headerlink" href="#formatting" title="Link to this heading"></a></h3>
+<p>We use automated code formatting. Before committing, ensure:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Format code</span>
+black<span class="w"> </span>src/<span class="w"> </span>tests/<span class="w"> </span>scripts/
+isort<span class="w"> </span>src/<span class="w"> </span>tests/<span class="w"> </span>scripts/
+
+<span class="c1"># Check for issues</span>
+ruff<span class="w"> </span>check<span class="w"> </span>src/<span class="w"> </span>tests/<span class="w"> </span>scripts/
+mypy<span class="w"> </span>src/
+</pre></div>
+</div>
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading"></a></h3>
+<p>All public functions and classes must include docstrings:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_fitness</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the fitness function for a Bayesian block.</span>
+
+<span class="sd">    The fitness function is defined as:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        F(n, t) = \begin{cases}</span>
+<span class="sd">            n \log n - n &amp; \text{if } n &gt; 0 \\</span>
+<span class="sd">            0 &amp; \text{if } n = 0</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    :param n: Number of events in the block.</span>
+<span class="sd">    :param t: Duration of the block in seconds.</span>
+<span class="sd">    :return: The fitness value.</span>
+<span class="sd">    :raises ValueError: If n is negative.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h3>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Write tests for new functionality</p></li>
+<li><p>Ensure existing tests pass</p></li>
+<li><p>Aim for high test coverage</p></li>
+<li><p>Include both unit tests and integration tests</p></li>
+</ul>
+</section>
+</section>
+<section id="pull-request-guidelines">
+<h2>Pull Request Guidelines<a class="headerlink" href="#pull-request-guidelines" title="Link to this heading"></a></h2>
+<p>Before submitting a pull request:</p>
+<dl class="simple">
+<dt>✅ <strong>Code Quality</strong></dt><dd><ul class="simple">
+<li><p>All pre-commit hooks pass</p></li>
+<li><p>Code follows project style guidelines</p></li>
+<li><p>No linting errors or warnings</p></li>
+</ul>
+</dd>
+<dt>✅ <strong>Documentation</strong></dt><dd><ul class="simple">
+<li><p>Docstrings added for new functions/classes</p></li>
+<li><p>Mathematical formulas properly formatted</p></li>
+<li><p>Documentation builds without errors</p></li>
+</ul>
+</dd>
+<dt>✅ <strong>Testing</strong></dt><dd><ul class="simple">
+<li><p>Tests added for new functionality</p></li>
+<li><p>All existing tests pass</p></li>
+<li><p>No significant decrease in test coverage</p></li>
+</ul>
+</dd>
+<dt>✅ <strong>Licensing</strong></dt><dd><ul class="simple">
+<li><p>GPL license header added to new files</p></li>
+<li><p>No proprietary or incompatible code included</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="review-process">
+<h2>Review Process<a class="headerlink" href="#review-process" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Automated checks</strong>: GitHub Actions will run formatting, linting, and tests</p></li>
+<li><p><strong>Code review</strong>: Maintainers will review your code for quality and consistency</p></li>
+<li><p><strong>Scientific review</strong>: For algorithm changes, we may request scientific validation</p></li>
+<li><p><strong>Documentation review</strong>: Ensure documentation is clear and complete</p></li>
+</ol>
+</section>
+<section id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Questions</strong>: Open a GitHub issue with the “question” label</p></li>
+<li><p><strong>Bugs</strong>: Open a GitHub issue with the “bug” label</p></li>
+<li><p><strong>Feature requests</strong>: Open a GitHub issue with the “enhancement” label</p></li>
+<li><p><strong>Discussion</strong>: Use GitHub Discussions for general conversation</p></li>
+</ul>
+</section>
+<section id="contact">
+<h2>Contact<a class="headerlink" href="#contact" title="Link to this heading"></a></h2>
+<p>For major contributions or questions about project direction, contact:</p>
+<ul class="simple">
+<li><p>Carlos Márcio de Oliveira e Silva Filho (<a class="reference external" href="mailto:cfilho3&#37;&#52;&#48;gatech&#46;edu">cfilho3<span>&#64;</span>gatech<span>&#46;</span>edu</a>)</p></li>
+<li><p>Ignacio Taboada (<a class="reference external" href="mailto:itaboada&#37;&#52;&#48;gatech&#46;edu">itaboada<span>&#64;</span>gatech<span>&#46;</span>edu</a>)</p></li>
+</ul>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Link to this heading"></a></h2>
+<p>By contributing to FLARE-BB, you agree that your contributions will be licensed under the same
+GPL-3.0-or-later license as the project.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="changelog.html" class="btn btn-neutral float-left" title="Changelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Carlos Márcio de Oliveira e Silva Filho, Ignacio Taboada.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

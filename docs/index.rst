@@ -56,6 +56,9 @@ KDE Analysis Quick Start
 
 .. code-block:: bash
 
+   # Download light curve data for all CLEAN sources
+   python scripts/download_lcrs.py
+
    # Generate KDE data from real blazar light curves
    python scripts/generate_kde.py
 

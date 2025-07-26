@@ -12,6 +12,7 @@ All implementation details are kept in ``src/``, following the project's design 
 The scripts directory contains:
 
 * **Core Processing Scripts**: Scripts that handle data-intensive operations
+* **Data Download Scripts**: Tools for fetching and caching external data
 * **Usage Examples**: Complete workflows from data loading to analysis
 * **Parameter Exploration**: Tools for systematic parameter sweeps
 * **Data Examination**: Utilities for analyzing results
@@ -26,6 +27,60 @@ Architecture
 
 KDE Generation Scripts
 ----------------------
+
+download_lcrs.py
+~~~~~~~~~~~~~~~
+
+**Script for downloading Light Curve Repository (LCR) data for all CLEAN sources**
+
+This script downloads light curve data for all sources listed in the 4FGL-DR4 catalog with the CLEAN flag.
+It uses the pyLCR library to fetch data from the Fermi database and caches the results locally for efficient
+reuse in subsequent analyses.
+
+Usage Examples:
+
+.. code-block:: bash
+
+   # Download with default settings (8 workers, gll_psc_v32.fit catalog)
+   python scripts/download_lcrs.py
+
+   # Use 4 workers instead of 8 (useful for slower connections)
+   python scripts/download_lcrs.py --workers 4
+
+   # Use a different catalog file
+   python scripts/download_lcrs.py --catalog my_catalog.fit
+
+   # Use both custom arguments
+   python scripts/download_lcrs.py --workers 16 --catalog new_catalog.fit
+
+   # Get help
+   python scripts/download_lcrs.py --help
+
+Command Line Options:
+
+* ``--workers INT`` - Number of worker threads for parallel processing (default: 8)
+* ``--catalog STR`` - Name of the catalog file (default: gll_psc_v32.fit)
+
+Data Processing:
+
+The script processes each source through multiple parameter combinations:
+
+* **Cadence**: daily, weekly, monthly
+* **Flux Type**: photon, energy
+* **Index Type**: fixed, free
+* **TS Minimum**: 4
+
+Features:
+- **Automatic Caching**: Uses CachedLightCurve for efficient data management
+- **Error Handling**: Gracefully handles API errors, empty sources, and network issues
+- **Progress Tracking**: Shows download progress with tqdm
+- **Parallel Processing**: Configurable number of worker threads
+- **Flexible Catalog Support**: Can work with different catalog files
+
+Output:
+- Light curve data is cached in ``data/cache/LCRs/`` directory
+- Each source gets its own cache file with parameter-encoded naming
+- Failed downloads are logged but don't stop the overall process
 
 generate_kde.py
 ~~~~~~~~~~~~~~~
@@ -139,18 +194,19 @@ The complete data processing workflow:
 
 .. code-block:: text
 
-   4FGL Catalog → Blazar Filter → Light Curves → Quality Cuts → KDE Generation → HDF5 Output
+   4FGL Catalog → LCR Download → Blazar Filter → Light Curves → Quality Cuts → KDE Generation → HDF5 Output
                                                                       ↓
                                                               Parameter-Encoded Filename
 
 Typical Processing Steps:
 
 1. **Catalog Loading**: Load Fermi-LAT 4FGL catalog
-2. **Source Classification**: Identify blazars (BLL, FSRQ, BCU)
-3. **Light Curve Processing**: Extract flux and error measurements
-4. **Quality Filtering**: Apply TS thresholds and error validation
-5. **KDE Computation**: Generate 2D kernel density estimation
-6. **Data Storage**: Save with comprehensive metadata and checksums
+2. **LCR Download**: Download light curve data for all CLEAN sources
+3. **Source Classification**: Identify blazars (BLL, FSRQ, BCU)
+4. **Light Curve Processing**: Extract flux and error measurements
+5. **Quality Filtering**: Apply TS thresholds and error validation
+6. **KDE Computation**: Generate 2D kernel density estimation
+7. **Data Storage**: Save with comprehensive metadata and checksums
 
 Available Parameters
 --------------------

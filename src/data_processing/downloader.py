@@ -24,13 +24,9 @@
 
 import os
 import sys
-from concurrent.futures import ThreadPoolExecutor
 from json import JSONDecodeError
 
-import pandas as pd
 import pyLCR
-from astropy.table import Table
-from tqdm import tqdm
 
 # Handle both relative and absolute imports
 try:
@@ -127,35 +123,3 @@ def download_cache_source(source: str, c_folder: str = cache_folder) -> None:
                         print(
                             f"Unexpected error for {source} {cadence} {flux_type} {index_type} {ts_min}: {e}\n", end=""
                         )
-
-
-if __name__ == "__main__":
-    # Loading the 4FGL-DR4 catalog
-    catalog_folder = os.path.join("data", "catalogs") + os.sep
-    # Check if the catalog folder exists. If not, raise an error.
-    if not os.path.exists(catalog_folder):
-        raise FileNotFoundError(f"Catalog folder {catalog_folder} not found.")
-    # The name of the catalog file
-    catalog_name = "gll_psc_v32.fit"
-    # Check if the catalog file exists. If not, raise an error.
-    if not os.path.exists(os.path.join(catalog_folder, catalog_name)):
-        raise FileNotFoundError(f"Catalog file {catalog_name} not found.")
-    # Load the catalog as a fits table
-    c_table = Table.read(os.path.join(catalog_folder, catalog_name), format="fits", hdu=1)
-    # Filter multi-dimensional columns
-    column_names = [name for name in c_table.columns if len(c_table[name].shape) <= 1]
-    # Convert the table to a pandas dataframe
-    df: pd.DataFrame = c_table[column_names].to_pandas()
-    # Filter the dataframe to only include sources with the CLEAN flag
-    df = df.loc[(df["Flags"] == 0).astype(bool)]
-    # Convert the source names to strings
-    df["Source_Name"] = df["Source_Name"].apply(format_src_name)
-
-    # Create the cache folder if it does not exist
-    ensure_cache_folder_exists()
-
-    # Download the LCRs for all sources in the dataframe using multi-threading
-    # Since ping is the bottleneck, no parallelization is needed.
-    with ThreadPoolExecutor(max_workers=8) as executor:
-        for _ in tqdm(executor.map(download_cache_source, df["Source_Name"].values), total=len(df["Source_Name"])):
-            pass

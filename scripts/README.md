@@ -10,11 +10,31 @@ This directory contains usage scripts that demonstrate the "heavy lifting" calcu
 - `src/data_processing/caching.py` - Light curve caching utilities
 
 ### Usage Scripts (`scripts/`)
+- `download_lcrs.py` - **Download Light Curve Repository data for all CLEAN sources**
 - `generate_kde.py` - **Main script for KDE generation with real blazar data**
 - `kde_data_example.py` - Examine and analyze existing KDE files
 - `demo_kde_filenames.py` - Demonstrate filename encoding system
 
 ## 🚀 Usage Examples
+
+### Download Light Curve Data
+
+```bash
+# Download with default settings (8 workers, gll_psc_v32.fit catalog)
+python scripts/download_lcrs.py
+
+# Use 4 workers instead of 8 (useful for slower connections)
+python scripts/download_lcrs.py --workers 4
+
+# Use a different catalog file
+python scripts/download_lcrs.py --catalog my_catalog.fit
+
+# Use both custom arguments
+python scripts/download_lcrs.py --workers 16 --catalog new_catalog.fit
+
+# Get help
+python scripts/download_lcrs.py --help
+```
 
 ### Generate KDE Data
 
@@ -65,7 +85,7 @@ python scripts/demo_kde_filenames.py
 
 ### Data Flow:
 ```
-4FGL Catalog → Blazar Filter → Light Curves → Quality Cuts → KDE Generation → HDF5 Output
+4FGL Catalog → LCR Download → Blazar Filter → Light Curves → Quality Cuts → KDE Generation → HDF5 Output
 ```
 
 ## 📋 Parameter-Encoded Filenames

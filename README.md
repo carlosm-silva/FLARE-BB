@@ -6,7 +6,7 @@ FLARE-BB (**F**ermi **L**AT **A**daptive **R**esolution **E**nhancement with **B
 
 ## Documentation
 
-📚 **Full documentation is available at:** [https://carlosfilho3.github.io/FLARE-BB/](https://carlosfilho3.github.io/FLARE-BB/)
+📚 **Full documentation is available at:** [https://carlosm-silva.github.io/FLARE-BB/](https://carlosm-silva.github.io/FLARE-BB/)
 
 The documentation includes:
 - API reference for all modules

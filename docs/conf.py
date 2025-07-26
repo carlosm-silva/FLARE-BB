@@ -68,7 +68,7 @@ html_title = f"{project} v{version}"
 html_short_title = project
 
 # GitHub Pages configuration
-html_baseurl = "https://carlosfilho3.github.io/FLARE-BB/"
+html_baseurl = "https://carlosm-silva.github.io/FLARE-BB/"
 
 # Read the Docs theme options
 html_theme_options = {

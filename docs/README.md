@@ -44,7 +44,7 @@ After building, you can view the documentation by opening `docs/_build/html/inde
 
 The documentation is automatically built and deployed to GitHub Pages when changes are pushed to the main branch. The live documentation is available at:
 
-https://carlosfilho3.github.io/FLARE-BB/
+https://carlosm-silva.github.io/FLARE-BB/
 
 ## Structure
 

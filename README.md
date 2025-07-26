@@ -4,6 +4,16 @@
 
 FLARE-BB (**F**ermi **L**AT **A**daptive **R**esolution **E**nhancement with **B**ayesian **B**locks): A Bayesian Blocks Algorithm for Detecting Gamma-Ray Flares in Fermi-LAT Light Curves
 
+## Documentation
+
+📚 **Full documentation is available at:** [https://carlosfilho3.github.io/FLARE-BB/](https://carlosfilho3.github.io/FLARE-BB/)
+
+The documentation includes:
+- API reference for all modules
+- Installation and usage guides
+- Development documentation
+- Examples and tutorials
+
 ## Disclaimer
 
 This software is provided "as is" without warranty of any kind. The authors provide no technical support, maintenance, or assistance with this software. Use at your own risk.

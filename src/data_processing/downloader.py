@@ -1,27 +1,26 @@
-"""
-SPDX-License-Identifier: GPL-3.0-or-later
-FLARE-BB – Bayesian Blocks algorithm for detecting gamma-ray flares
-Copyright © 2025 Carlos Márcio de Oliveira e Silva Filho
-Copyright © 2025 Ignacio Taboada
-
-This file is part of FLARE-BB.
-FLARE-BB is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-FLARE-BB is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this file.  If not, see <https://www.gnu.org/licenses/>.
-
-------------------------------------------------------------------------------------------------------------------------
-
-This script downloads the LCRs for all sources listed in the 4FGL-DR4 catalog with the CLEAN flag.
-"""
+# SPDX-License-Identifier: GPL-3.0-or-later
+# FLARE-BB – Bayesian Blocks algorithm for detecting gamma-ray flares
+# Copyright © 2025 Carlos Márcio de Oliveira e Silva Filho
+# Copyright © 2025 Ignacio Taboada
+#
+# This file is part of FLARE-BB.
+# FLARE-BB is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# FLARE-BB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file.  If not, see <https://www.gnu.org/licenses/>.
+#
+# ------------------------------------------------------------------------------------------------------------------------
+#
+# This script downloads the LCRs for all sources listed in the 4FGL-DR4 catalog with the CLEAN flag.
+#
 
 import os
 import sys
@@ -44,9 +43,14 @@ except ImportError:
 # The path to the cache folder
 cache_folder = os.path.join("data", "cache", "LCRs") + os.sep
 
-# Check if the cache folder exists. If not, create it.
-if not os.path.exists(cache_folder):
-    os.mkdir(cache_folder)
+
+def ensure_cache_folder_exists():
+    """
+    Ensure that the cache folder exists. Create it if it doesn't exist.
+    This is called when needed rather than at import time.
+    """
+    if not os.path.exists(cache_folder):
+        os.makedirs(cache_folder, exist_ok=True)
 
 
 def format_src_name(name: bytes) -> str:
@@ -68,6 +72,9 @@ def download_cache_source(source: str, c_folder: str = cache_folder) -> None:
     :param c_folder: The path to the cache folder (unused now, but kept for compatibility).
     :return: None
     """
+    # Ensure cache folder exists
+    ensure_cache_folder_exists()
+
     # Check if source is available in pyLCR.sources
     if source not in pyLCR.sources:
         return
@@ -145,8 +152,7 @@ if __name__ == "__main__":
     df["Source_Name"] = df["Source_Name"].apply(format_src_name)
 
     # Create the cache folder if it does not exist
-    if not os.path.exists(cache_folder):
-        os.mkdir(cache_folder)
+    ensure_cache_folder_exists()
 
     # Download the LCRs for all sources in the dataframe using multi-threading
     # Since ping is the bottleneck, no parallelization is needed.

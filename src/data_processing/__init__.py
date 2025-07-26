@@ -23,3 +23,13 @@ Data processing module for handling Fermi-LAT light curve data.
 This module provides tools for downloading, caching, and processing gamma-ray
 light curves from the Fermi-LAT Light Curve Repository.
 """
+
+# Import submodules to make them accessible for autodoc
+from . import caching, downloader, kde_generator, kde_utils
+
+__all__ = [
+    "caching",
+    "downloader",
+    "kde_generator",
+    "kde_utils",
+]

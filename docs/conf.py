@@ -1,3 +1,22 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# FLARE-BB – Bayesian Blocks algorithm for detecting gamma-ray flares
+# Copyright © 2025 Carlos Márcio de Oliveira e Silva Filho
+# Copyright © 2025 Ignacio Taboada
+#
+# This file is part of FLARE-BB.
+# FLARE-BB is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# FLARE-BB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file.  If not, see <https://www.gnu.org/licenses/>.
+
 # Configuration file for the Sphinx documentation builder.
 #
 # For the full list of built-in configuration values, see the documentation:
@@ -11,6 +30,11 @@ import sys
 
 # Add the src directory to the Python path
 sys.path.insert(0, os.path.abspath("../src"))
+
+# Change to project root directory for proper relative path resolution
+original_cwd = os.getcwd()
+project_root = os.path.abspath("..")
+os.chdir(project_root)
 
 project = "FLARE-BB"
 copyright = "2025, Carlos Márcio de Oliveira e Silva Filho, Ignacio Taboada"
@@ -38,10 +62,32 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = "alabaster"
+html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
 html_title = f"{project} v{version}"
 html_short_title = project
+
+# GitHub Pages configuration
+html_baseurl = "https://carlosfilho3.github.io/FLARE-BB/"
+
+# Read the Docs theme options
+html_theme_options = {
+    "canonical_url": html_baseurl,
+    "analytics_id": "",  # Google Analytics ID
+    "analytics_anonymize_ip": False,
+    "logo_only": False,
+    "display_version": True,
+    "prev_next_buttons_location": "bottom",
+    "style_external_links": False,
+    "vcs_pageview_mode": "",
+    "style_nav_header_background": "#2980B9",
+    # Toc options
+    "collapse_navigation": False,
+    "sticky_navigation": True,
+    "navigation_depth": 4,
+    "includehidden": True,
+    "titles_only": False,
+}
 
 # -- Options for autodoc extension -------------------------------------------
 
@@ -52,6 +98,38 @@ autodoc_default_options = {
     "undoc-members": True,
     "exclude-members": "__weakref__",
 }
+
+# Mock imports for modules that have runtime dependencies
+autodoc_mock_imports = [
+    "pyLCR",
+]
+
+# Configure autodoc to handle import errors gracefully
+autodoc_typehints = "description"
+autodoc_typehints_description_target = "documented"
+
+# Create mock environment for problematic imports
+import sys
+
+
+# Mock the problematic filesystem operations
+def setup_mocks():
+    """Set up mocks for modules that have filesystem dependencies at import time."""
+
+    # Mock os.listdir to return empty list for the cache folder
+    original_listdir = os.listdir
+
+    def mock_listdir(path):
+        if "cache" in path and "LCRs" in path:
+            return []  # Return empty list for cache folder
+        return original_listdir(path)
+
+    # Apply the mock
+    os.listdir = mock_listdir
+
+
+# Set up mocks before importing modules
+setup_mocks()
 
 # Generate autosummary automatically
 autosummary_generate = True

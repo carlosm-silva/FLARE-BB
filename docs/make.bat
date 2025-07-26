@@ -2,10 +2,10 @@
 
 pushd %~dp0
 
-REM Command file for Sphinx documentation
+REM Command file for Sphinx documentation with correct Python environment
 
 if "%SPHINXBUILD%" == "" (
-	set SPHINXBUILD=sphinx-build
+	set SPHINXBUILD=C:\Users\Carlos\anaconda3\envs\scientific_general\python.exe -m sphinx
 )
 set SOURCEDIR=.
 set BUILDDIR=_build
@@ -13,13 +13,14 @@ set BUILDDIR=_build
 %SPHINXBUILD% >NUL 2>NUL
 if errorlevel 9009 (
 	echo.
-	echo.The 'sphinx-build' command was not found. Make sure you have Sphinx
-	echo.installed, then set the SPHINXBUILD environment variable to point
-	echo.to the full path of the 'sphinx-build' executable. Alternatively you
-	echo.may add the Sphinx directory to PATH.
+	echo.The Python environment or Sphinx was not found. Make sure you have:
+	echo.1. Anaconda installed at C:\Users\Carlos\anaconda3\
+	echo.2. The 'scientific_general' environment created
+	echo.3. Sphinx installed in that environment
 	echo.
-	echo.If you don't have Sphinx installed, grab it from
-	echo.https://www.sphinx-doc.org/
+	echo.You can install Sphinx with:
+	echo.conda activate scientific_general
+	echo.pip install sphinx sphinx-rtd-theme
 	exit /b 1
 )
 

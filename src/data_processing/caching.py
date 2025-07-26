@@ -1,29 +1,28 @@
-"""
-SPDX-License-Identifier: GPL-3.0-or-later
-FLARE-BB – Bayesian Blocks algorithm for detecting gamma-ray flares
-Copyright © 2025 Carlos Márcio de Oliveira e Silva Filho
-Copyright © 2025 Ignacio Taboada
-
-This file is part of FLARE-BB.
-FLARE-BB is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-FLARE-BB is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this file.  If not, see <https://www.gnu.org/licenses/>.
-
-------------------------------------------------------------------------------------------------------------------------
-
-Warning: The class implemented in this file uses Python's pickle module to cache light curves. Therefore, it is subject
-to the same security risks as pickle. See https://docs.python.org/3/library/pickle.html#security-and-pickle for more
-info.
-"""
+# SPDX-License-Identifier: GPL-3.0-or-later
+# FLARE-BB – Bayesian Blocks algorithm for detecting gamma-ray flares
+# Copyright © 2025 Carlos Márcio de Oliveira e Silva Filho
+# Copyright © 2025 Ignacio Taboada
+#
+# This file is part of FLARE-BB.
+# FLARE-BB is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# FLARE-BB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file.  If not, see <https://www.gnu.org/licenses/>.
+#
+# ------------------------------------------------------------------------------------------------------------------------
+#
+# Warning: The class implemented in this file uses Python's pickle module to cache light curves. Therefore, it is subject
+# to the same security risks as pickle. See https://docs.python.org/3/library/pickle.html#security-and-pickle for more
+# info.
+#
 
 import os
 import pickle as pkl
@@ -63,7 +62,13 @@ class CachedLightCurve(pyLCR.DataTools.LightCurve):
     For more info on pyLCR see https://github.com/dankocevski/pyLCR.
     """
 
-    folder_files = os.listdir(cache_folder)
+    @property
+    def folder_files(self):
+        """Get the list of files in the cache folder."""
+        try:
+            return os.listdir(cache_folder)
+        except FileNotFoundError:
+            return []
 
     def __init__(
         self,
@@ -115,7 +120,7 @@ class CachedLightCurve(pyLCR.DataTools.LightCurve):
         # Check if the cache file exists.
         is_cached, self.file_name = check_substr_in_list_v2(self.file_name, TypedList(self.folder_files))
         if not is_cached:
-            self.folder_files = os.listdir(cache_folder)
+            # Refresh folder files list and check again
             is_cached, self.file_name = check_substr_in_list_v2(self.file_name, TypedList(self.folder_files))
         if is_cached:
             try:

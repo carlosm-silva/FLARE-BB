@@ -155,18 +155,46 @@ Typical Processing Steps:
 Available Parameters
 --------------------
 
-==============  ===========================  =======  ==================
-Parameter       Description                  Default  Example Values
-==============  ===========================  =======  ==================
-``bandwidth``   KDE smoothing bandwidth      0.2      0.1, 0.15, 0.3
-``nbins``       Grid resolution per dim      512      256, 1024, 2048
-``ts_threshold`` Detection significance      19       16, 25, 30
-``flux_type``   Type of flux measurement     'energy' 'energy', 'photon'
-``x_low``       Log flux range (low)         -4.9     Custom ranges
-``x_high``      Log flux range (high)        -2.8     Custom ranges
-``y_low``       Log error range (low)        -5.35    Custom ranges
-``y_high``      Log error range (high)       -3.25    Custom ranges
-==============  ===========================  =======  ==================
+.. list-table:: KDE Generation Parameters
+   :widths: 20 40 20 20
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+     - Default
+     - Example Values
+   * - bandwidth
+     - KDE smoothing bandwidth
+     - 0.2
+     - 0.1, 0.15, 0.3
+   * - nbins
+     - Grid resolution per dim
+     - 512
+     - 256, 1024, 2048
+   * - ts_threshold
+     - Detection significance
+     - 19
+     - 16, 25, 30
+   * - flux_type
+     - Type of flux measurement
+     - energy
+     - energy, photon
+   * - x_low
+     - Log flux range (low)
+     - -4.9
+     - Custom ranges
+   * - x_high
+     - Log flux range (high)
+     - -2.8
+     - Custom ranges
+   * - y_low
+     - Log error range (low)
+     - -5.35
+     - Custom ranges
+   * - y_high
+     - Log error range (high)
+     - -3.25
+     - Custom ranges
 
 Data Format
 -----------

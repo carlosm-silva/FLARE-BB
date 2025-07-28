@@ -187,6 +187,170 @@ Features:
 - **Educational**: Explains the filename encoding system
 - **Quick Demo**: Fast way to understand the naming convention
 
+Flux Distribution Scripts
+-------------------------
+
+build_distributions.py
+~~~~~~~~~~~~~~~~~~~~~~
+
+**Main script for building flux distributions from KDE data using Bayesian analysis**
+
+This script implements the complete Bayesian workflow for building flux distributions from KDE data,
+following the mathematical framework described in the measurement model. It demonstrates the
+"heavy lifting" approach by orchestrating the core algorithms from the ``src/`` modules.
+
+Mathematical Framework
+^^^^^^^^^^^^^^^^^^^^^
+
+The script implements the complete Bayesian analysis workflow:
+
+1. **Prior Distribution**: p(F_m, σ_m) from KDE data
+2. **Likelihood Function**: p(F_R | F_m, σ_m) with log-normal uncertainties
+3. **Marginal Likelihood**: p(F_R) using the Law of Total Probability
+4. **Posterior Distribution**: p(F_m, σ_m | F_R) using Bayes' theorem
+
+Usage Examples:
+
+.. code-block:: bash
+
+   # Build distributions with default parameters
+   python scripts/build_distributions.py
+
+   # Build with custom configuration
+   python scripts/build_distributions.py --hd-resolution 2048 --ml-resolution 256
+
+   # Build with specific KDE file
+   python scripts/build_distributions.py --kde-bandwidth 0.2 --kde-nbins 512
+
+   # List existing distribution files
+   python scripts/build_distributions.py --list
+
+   # Quiet mode (minimal output)
+   python scripts/build_distributions.py --quiet
+
+   # Verbose mode (detailed progress)
+   python scripts/build_distributions.py --verbose
+
+Command Line Options:
+
+Configuration Parameters:
+* ``--hd-resolution INT`` - High-definition grid resolution (default: 1024)
+* ``--ml-resolution INT`` - Marginal likelihood grid resolution (default: 128)
+* ``--ml-interp-points INT`` - Marginal likelihood interpolation points (default: 500)
+* ``--final-bins INT`` - Final grid resolution (default: 256)
+* ``--flux-min FLOAT`` - Minimum log flux value (default: -4.75)
+* ``--flux-max FLOAT`` - Maximum log flux value (default: -3.0)
+* ``--range-extension FLOAT`` - Marginal likelihood range extension (default: 3.0)
+* ``--epsilon FLOAT`` - Numerical stability epsilon (default: 1e-300)
+* ``--interpolation STR`` - Interpolation method (default: "linear")
+
+KDE Selection Parameters:
+* ``--kde-bandwidth FLOAT`` - Select KDE file with specific bandwidth
+* ``--kde-nbins INT`` - Select KDE file with specific grid resolution
+* ``--kde-ts-threshold FLOAT`` - Select KDE file with specific TS threshold
+
+Workflow Options:
+* ``--kde-dir PATH`` - Directory containing KDE files (default: data/cache/kde)
+* ``--list`` - List existing distribution files and exit
+* ``--verbose`` - Show detailed progress information
+* ``--quiet`` - Suppress detailed progress information
+
+Features:
+- **Complete Bayesian Workflow**: Implements the full mathematical framework
+- **Progress Tracking**: Optional tqdm progress bars and step-by-step feedback
+- **Parameter Validation**: Comprehensive validation of all configuration parameters
+- **File Management**: Automatic file discovery and parameter matching
+- **Error Recovery**: Robust error handling with fallback mechanisms
+- **Verbosity Control**: Configurable output levels for different use cases
+
+Output:
+- Distribution files saved in ``data/cache/distributions/`` directory
+- Parameter-encoded filenames for easy identification
+- Comprehensive metadata including source KDE information
+- HDF5 format with compression for efficient storage
+
+Example Output:
+^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+   🔬 FLARE-BB Flux Distribution Builder
+   ============================================================
+   📂 Loading KDE data...
+   📁 Using most recent KDE file: kde_bw0.2_n512_ts19_flux-energy_x-4.9to-2.8_y-5.35to-3.25.h5
+   📊 KDE File Metadata:
+     • Generation timestamp: 2025-01-15T10:30:45.123456
+     • File format version: 1.0
+     • Grid size: 512×512
+     • Bandwidth: 0.2
+     • TS threshold: 19
+     • X range: [-4.9, -2.8]
+     • Y range: [-5.35, -3.25]
+
+   🔬 Building Flux Distributions from KDE Data
+   ============================================================
+   ⚙️  Configuration:
+     • High-definition resolution: 1024
+     • Marginal likelihood resolution: 128
+     • Marginal likelihood interpolation points: 500
+     • Final grid bins: 256
+     • Flux range: [-4.75, -3.0]
+     • Range extension: 3.0
+     • Interpolation method: linear
+
+   🔍 Analyzing KDE grid structure...
+     • KDE grid: 512×512
+     • X range: [-4.900, -2.800]
+     • Y range: [-5.350, -3.250]
+
+   🧮 Running flux distribution calculation...
+   🔧 Step 1/5: Extracting and normalizing KDE data...
+   🔧 Step 2/5: Creating KDE interpolators...
+   🔧 Step 3/5: Setting up probability density functions...
+   🔧 Step 4/5: Computing marginal likelihood (this may take several minutes)...
+   🔧 Step 5/5: Building posterior distributions...
+   🔄 Computing posterior PDFs for each true flux value...
+   Generating flux PDFs: 100%|██████████| 256/256 [02:15<00:00, 1.89flux/s]
+
+   ✅ Distribution calculation completed successfully!
+
+   📊 Results Summary:
+     • Posterior PDF grid shape: (256, 256, 256)
+     • True flux range: [-4.750, -3.000]
+     • Measured flux grid shape: (256, 256)
+     • Measured uncertainty grid shape: (256, 256)
+
+   💾 Saving distribution data...
+   ✅ Results saved to: flux_dist_hd-res1024_ml-res128_ml-interp500_bins256_flux-4.75to-3.0_ext3.0_kde-bw0.2_n512_ts19.h5
+   📁 Full path: data/cache/distributions/flux_dist_hd-res1024_ml-res128_ml-interp500_bins256_flux-4.75to-3.0_ext3.0_kde-bw0.2_n512_ts19.h5
+   💽 File size: 134.22 MB
+
+   🎉 Distribution building complete!
+   💡 Use --list to see all available distribution files
+
+Architecture Integration
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The script demonstrates proper integration with the repository's architecture:
+
+.. code-block:: python
+
+   # Heavy lifting: CLI parsing, data loading, orchestration
+   sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+   from data_processing.distribution_builder import build_flux_distributions
+   from data_processing.distribution_config import DistributionConfig
+   from data_processing.distribution_utils import save_distribution_data
+
+   # Heavy machinery: Core algorithms from src/
+   result = build_flux_distributions(points, values, config, verbose=verbose)
+   save_distribution_data(result, output_path, kde_metadata, description)
+
+This separation ensures:
+- ✅ **Maintainability**: Core algorithms isolated in src/
+- ✅ **Testability**: Individual components can be unit tested
+- ✅ **Reusability**: src/ modules can be imported by other scripts
+- ✅ **Clear Responsibilities**: Scripts handle workflow, src/ handles algorithms
+
 Data Flow
 ---------
 
@@ -197,6 +361,10 @@ The complete data processing workflow:
    4FGL Catalog → LCR Download → Blazar Filter → Light Curves → Quality Cuts → KDE Generation → HDF5 Output
                                                                       ↓
                                                               Parameter-Encoded Filename
+                                                                      ↓
+                                                              Distribution Building → Bayesian Analysis → Posterior PDFs
+                                                                      ↓
+                                                              Parameter-Encoded Distribution Files
 
 Typical Processing Steps:
 
@@ -206,7 +374,8 @@ Typical Processing Steps:
 4. **Light Curve Processing**: Extract flux and error measurements
 5. **Quality Filtering**: Apply TS thresholds and error validation
 6. **KDE Computation**: Generate 2D kernel density estimation
-7. **Data Storage**: Save with comprehensive metadata and checksums
+7. **Distribution Building**: Apply Bayesian analysis to build posterior distributions
+8. **Data Storage**: Save with comprehensive metadata and checksums
 
 Available Parameters
 --------------------
@@ -252,6 +421,51 @@ Available Parameters
      - -3.25
      - Custom ranges
 
+.. list-table:: Distribution Building Parameters
+   :widths: 20 40 20 20
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+     - Default
+     - Example Values
+   * - hd_resolution
+     - High-definition grid resolution
+     - 1024
+     - 512, 2048, 4096
+   * - ml_resolution
+     - Marginal likelihood resolution
+     - 128
+     - 64, 256, 512
+   * - ml_interp_points
+     - Marginal likelihood interpolation points
+     - 500
+     - 250, 1000, 2000
+   * - final_bins
+     - Final grid resolution
+     - 256
+     - 128, 512, 1024
+   * - flux_min
+     - Minimum log flux value
+     - -4.75
+     - -5.0, -4.5, -3.5
+   * - flux_max
+     - Maximum log flux value
+     - -3.0
+     - -3.5, -2.5, -2.0
+   * - range_extension
+     - Marginal likelihood range extension
+     - 3.0
+     - 2.0, 4.0, 5.0
+   * - epsilon
+     - Numerical stability epsilon
+     - 1e-300
+     - 1e-200, 1e-400
+   * - interpolation
+     - Interpolation method
+     - linear
+     - cubic, nearest
+
 Data Format
 -----------
 
@@ -285,6 +499,23 @@ File Structure:
        ├── description
        └── checksums (kde_data, points, values)
 
+Distribution files use a similar HDF5 structure:
+
+.. code-block:: text
+
+   DISTRIBUTION_FILE.h5
+   ├── posterior_pdf_grid      # 3D array of posterior PDFs
+   ├── flux_range              # Array of true flux values
+   ├── log_measured_flux_grid  # Grid of measured flux values
+   ├── log_measured_uncertainty_grid  # Grid of measured uncertainty values
+   ├── log_posterior_pdf_grid  # Log-transformed posterior PDF values
+   └── metadata/
+       ├── generation_timestamp
+       ├── distribution_config
+       ├── source_kde
+       ├── data_shapes
+       └── description
+
 Integration with Core Library
 -----------------------------
 
@@ -296,6 +527,8 @@ The scripts demonstrate proper usage patterns:
    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
    from data_processing.kde_generator import run_kde_generation
    from data_processing.kde_utils import examine_kde_data
+   from data_processing.distribution_builder import build_flux_distributions
+   from data_processing.distribution_utils import save_distribution_data
 
    # Heavy lifting: Load and process data
    catalog_df = load_fermi_catalog(args.catalog_path)
@@ -303,5 +536,8 @@ The scripts demonstrate proper usage patterns:
 
    # Heavy machinery: Generate KDE using core algorithms
    result = run_kde_generation(stacked_data, custom_params=custom_params)
+
+   # Heavy machinery: Build distributions using core algorithms
+   distribution_result = build_flux_distributions(points, values, config, verbose=verbose)
 
 This architecture keeps the codebase maintainable while making usage patterns clear and accessible.

@@ -17,6 +17,7 @@ in Fermi-LAT light curves. The package provides tools for:
 
 * **Data Processing**: Efficient caching and downloading of Fermi-LAT Light Curve Repository data
 * **KDE Analysis**: Advanced Kernel Density Estimation for flux-error relationship analysis in blazar light curves
+* **Flux Distribution Building**: Bayesian analysis for building flux distributions from KDE data
 * **Bayesian Analysis**: Implementation of the Bayesian Blocks algorithm for change-point detection
 * **Statistical Methods**: Advanced statistical tools for gamma-ray astronomy
 * **Simulation**: Tools for generating and analyzing synthetic light curves
@@ -28,6 +29,7 @@ Key Features
 * **High Performance**: Optimized with Numba for fast computation
 * **Flexible Caching**: Smart caching system for Fermi-LAT data with automatic expiration
 * **KDE Processing**: Sophisticated kernel density estimation with parameter-encoded filenames
+* **Bayesian Flux Distributions**: Complete Bayesian analysis workflow for flux distribution building
 * **Real Data Integration**: Seamless integration with Fermi-LAT 4FGL catalog and pyLCR
 * **Type Safety**: Full type hints for better code reliability
 * **Scientific Documentation**: LaTeX-formatted mathematical formulas in docstrings
@@ -76,6 +78,28 @@ KDE Analysis Quick Start
    kde_data, points, values, metadata = load_kde_data_with_metadata(filepath)
    params = metadata['kde_parameters']
 
+Flux Distribution Building Quick Start
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+   # Build flux distributions from KDE data
+   python scripts/build_distributions.py
+
+   # Build with custom parameters
+   python scripts/build_distributions.py --hd-resolution 2048 --ml-resolution 256
+
+   # List existing distribution files
+   python scripts/build_distributions.py --list
+
+.. code-block:: python
+
+   # Load distribution data with metadata
+   from data_processing.distribution_utils import load_distribution_data
+
+   result, metadata = load_distribution_data(filepath)
+   posterior_pdfs = result.posterior_pdf_grid  # Shape: (measured_flux, measured_uncertainty, true_flux)
+
 Mathematical Foundation
 -----------------------
 
@@ -109,6 +133,22 @@ The KDE analysis uses Gaussian kernel density estimation for 2D flux-error relat
 
 where :math:`K` is the Gaussian kernel, :math:`h` is the bandwidth, and :math:`(x_i, y_i)` are the flux-error data points in log space.
 
+Flux Distribution Mathematical Foundation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The flux distribution building implements a complete Bayesian analysis framework:
+
+**Prior Distribution**: p(F_m, σ_m) from KDE data
+**Likelihood Function**: p(F_R | F_m, σ_m) with log-normal uncertainties
+**Marginal Likelihood**: p(F_R) using the Law of Total Probability
+**Posterior Distribution**: p(F_m, σ_m | F_R) using Bayes' theorem
+
+.. math::
+
+   p(F_m, \sigma_m | F_R) = \frac{p(F_R | F_m, \sigma_m) \cdot p(F_m, \sigma_m)}{p(F_R)}
+
+where F_R is the true flux, F_m is the measured flux, and σ_m is the measurement uncertainty.
+
 API Documentation
 -----------------
 
@@ -127,6 +167,7 @@ API Documentation
    :caption: User Guides:
 
    kde_workflow
+   distribution_workflow
 
 .. toctree::
    :maxdepth: 1
@@ -161,8 +202,8 @@ Dependencies
 * Astropy
 * pyLCR
 * tqdm
-* h5py (for KDE data storage)
-* scipy (for KDE computation)
+* h5py (for KDE and distribution data storage)
+* scipy (for KDE computation and numerical integration)
 
 Development Setup
 -----------------

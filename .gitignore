@@ -227,3 +227,6 @@ results/figures/
 # Fits files
 *.fits
 *.fit
+
+# HDF5 files
+*.h5

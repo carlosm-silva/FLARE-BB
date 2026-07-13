@@ -224,7 +224,7 @@ class CachedLightCurve(pyLCR.DataTools.LightCurve):
                 )
                 # end="" behaves better with multi-threading than \n
         raise RuntimeError(
-            f"Download failed for {self.source} for " f"{self.cadence} {self.flux_type} {self.index_type} {self.ts_min}"
+            f"Download failed for {self.source} for {self.cadence} {self.flux_type} {self.index_type} {self.ts_min}"
         )
 
     def save_to_cache(self) -> None:

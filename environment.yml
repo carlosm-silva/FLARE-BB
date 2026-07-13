@@ -1,0 +1,18 @@
+name: flare_bb
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.11
+  - hdf5=1.14
+  - just
+  - numpy>=1.26,<2.5
+  - scipy>=1.13
+  - h5py>=3.10
+  - astropy>=6.0
+  - pandas>=2.2
+  - tqdm>=4.66
+  - uv
+  - pip
+  - pip:
+      - -e .[dev,docs]

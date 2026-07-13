@@ -1,31 +1,53 @@
 # FLARE-BB
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+FLARE-BB (**F**ermi **L**AT **A**daptive **R**esolution **E**nhancement with **B**ayesian **B**locks) provides tools for modeling Fermi-LAT measured flux/error behavior and building posterior flux distributions for flare analysis.
 
-FLARE-BB (**F**ermi **L**AT **A**daptive **R**esolution **E**nhancement with **B**ayesian **B**locks): A Bayesian Blocks Algorithm for Detecting Gamma-Ray Flares in Fermi-LAT Light Curves
+The package is organized around a modern `src/` layout:
 
-## Documentation
+- `flare_bb.core` contains pure numerical KDE and Bayesian distribution code.
+- `flare_bb.io` contains HDF5, catalog, and optional Fermi LCR adapters.
+- `flare_bb.pipeline` contains workflow orchestration used by command-line scripts.
 
-📚 **Full documentation is available at:** [https://carlosm-silva.github.io/FLARE-BB/](https://carlosm-silva.github.io/FLARE-BB/)
+## Installation
 
-The documentation includes:
-- API reference for all modules
-- Installation and usage guides
-- Development documentation
-- Examples and tutorials
+```bash
+conda env create -f environment.yml
+conda activate flare_bb
+pip install -e ".[dev,docs]"
+```
 
-## Disclaimer
+## Quick Start
 
-This software is provided "as is" without warranty of any kind. The authors provide no technical support, maintenance, or assistance with this software. Use at your own risk.
+```python
+import flare_bb as fbb
+from flare_bb.core import KdeConfig, compute_kde, create_sample_flux_data
 
-## Contact
+data = create_sample_flux_data(n_points=500)
+result = compute_kde(data, config=KdeConfig(bins=64))
 
-For questions or inquiries about this software, please contact:
+print(fbb.__version__)
+print(result.points.shape)
+```
 
-**Authors:**
-- Carlos Márcio de Oliveira e Silva Filho (cfilho3@gatech.edu)
-- Ignacio Taboada (itaboada@gatech.edu)
+## Command-Line Workflows
+
+```bash
+python scripts/generate_kde.py --sample-data --bins 128
+python scripts/build_distributions.py --final-bins 64 --ml-resolution 32 --hd-resolution 128 --progress
+python scripts/inspect_kde.py data/cache/kde/<kde-file>.h5
+```
+
+Fermi LAT Light Curve Repository downloads require `pyLCR`. That dependency is intentionally optional until a pinned fork/tag is configured.
+
+## Development
+
+```bash
+just check       # lint, format check, mypy, tests with coverage
+just test        # tests only
+just docs-build  # strict MkDocs build
+just fix         # Ruff auto-fix and format
+```
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0 or later - see the [LICENSE](LICENSE) file for details.
+FLARE-BB is licensed under GPL-3.0-or-later.

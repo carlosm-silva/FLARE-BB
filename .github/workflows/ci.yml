@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+env:
+  CONDA_ENV: flare_bb
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up conda environment
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: ${{ env.CONDA_ENV }}
+          environment-file: environment.yml
+          auto-activate-base: false
+          miniforge-version: latest
+
+      - name: Install package and dev dependencies
+        shell: bash -el {0}
+        run: pip install -e ".[dev]"
+
+      - name: Ruff lint
+        shell: bash -el {0}
+        run: ruff check .
+
+      - name: Ruff format check
+        shell: bash -el {0}
+        run: ruff format --check .
+
+      - name: mypy
+        shell: bash -el {0}
+        run: mypy src/
+
+      - name: pytest + coverage
+        shell: bash -el {0}
+        run: pytest --cov=src/flare_bb --cov-report=term-missing --cov-fail-under=80
+
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up conda environment
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: ${{ env.CONDA_ENV }}
+          environment-file: environment.yml
+          auto-activate-base: false
+          miniforge-version: latest
+
+      - name: Install docs dependencies
+        shell: bash -el {0}
+        run: pip install -e ".[docs]"
+
+      - name: MkDocs build
+        shell: bash -el {0}
+        run: mkdocs build --strict

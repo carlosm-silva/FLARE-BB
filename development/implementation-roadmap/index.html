@@ -1,0 +1,1744 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../migration-map/">
+      
+      
+        <link rel="next" href="../agentic-coding-workflow/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Implementation Roadmap - FLARE-BB</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#flare-bb-reproducible-scientific-package-roadmap" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="FLARE-BB" class="md-header__button md-logo" aria-label="FLARE-BB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FLARE-BB
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Implementation Roadmap
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="FLARE-BB" class="md-nav__button md-logo" aria-label="FLARE-BB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    FLARE-BB
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../measurement-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Measurement Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scientific-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scientific Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Legacy Migration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation Roadmap
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#milestone-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Milestone mapping
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Progress
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-workstreams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation workstreams
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation workstreams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#p0-scientific-contract-and-migration-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P0 — Scientific contract and migration inventory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p1-analysis-first-numerical-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P1 — Analysis-first numerical core
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p2-explicit-initialization-and-stable-light-curve-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P2 — Explicit initialization and stable light-curve cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p3-measurement-model-and-spline-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P3 — Measurement-model and spline hardening
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p4-reproducible-cpu-simulation-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P4 — Reproducible CPU simulation reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p5-optional-jaxgpu-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P5 — Optional JAX/GPU backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p6-resumable-trial-engine-and-paper-reproduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P6 — Resumable trial engine and paper reproduction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p7-documentation-tutorials-and-community-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P7 — Documentation, tutorials, and community release
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-and-release-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test and release gates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#immediate-agent-facing-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Immediate agent-facing sequence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../agentic-coding-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agentic Coding Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/flare_bb/core/config/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/flare_bb/core/distributions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Distributions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/flare_bb/core/kde/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KDE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/flare_bb/io/catalog/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Io
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Io
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/flare_bb/io/filenames/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filenames
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/flare_bb/io/hdf5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HDF5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/flare_bb/io/lcr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LCR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/flare_bb/pipeline/distributions/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pipeline
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/flare_bb/pipeline/kde/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KDE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#milestone-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Milestone mapping
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Progress
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-workstreams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation workstreams
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation workstreams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#p0-scientific-contract-and-migration-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P0 — Scientific contract and migration inventory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p1-analysis-first-numerical-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P1 — Analysis-first numerical core
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p2-explicit-initialization-and-stable-light-curve-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P2 — Explicit initialization and stable light-curve cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p3-measurement-model-and-spline-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P3 — Measurement-model and spline hardening
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p4-reproducible-cpu-simulation-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P4 — Reproducible CPU simulation reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p5-optional-jaxgpu-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P5 — Optional JAX/GPU backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p6-resumable-trial-engine-and-paper-reproduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P6 — Resumable trial engine and paper reproduction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p7-documentation-tutorials-and-community-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        P7 — Documentation, tutorials, and community release
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-and-release-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test and release gates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#immediate-agent-facing-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Immediate agent-facing sequence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="flare-bb-reproducible-scientific-package-roadmap">FLARE-BB Reproducible Scientific Package Roadmap<a class="headerlink" href="#flare-bb-reproducible-scientific-package-roadmap" title="Permanent link">&para;</a></h1>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>The long-term product will let scientists:</p>
+<ol>
+<li>Explicitly initialize a verified Fermi-LAT dataset and model cache.</li>
+<li>Load a real light curve and compute the paper-established Bayesian-block representation.</li>
+<li>Build or load the empirical measurement model <span class="arithmatex">\(p((F_m,\sigma_m)\mid F_R)\)</span>.</li>
+<li>Simulate seeded light curves with NumPy for validation or JAX/GPU for production.</li>
+<li>Run resumable NCP-prior studies and reproduce the paper's figures from archived inputs.</li>
+</ol>
+<p>The local <code>/paper</code> tree remains ignored and private. Its terminology and equations inform implementation, but stable
+conventions will be rewritten into tracked documentation without exposing unpublished paper text.</p>
+<h2 id="milestone-mapping">Milestone mapping<a class="headerlink" href="#milestone-mapping" title="Permanent link">&para;</a></h2>
+<p>Milestones describe user-visible delivery progress. The P-numbered sections below are implementation workstreams: a
+workstream may contribute to more than one milestone, and P7 supplies documentation and release work throughout.</p>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>User-visible outcome</th>
+<th>Supporting workstreams</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M0 — Scientific contract</td>
+<td>Shared terminology, defaults, and the legacy boundary are tracked.</td>
+<td>P0</td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>M1 — Real-light-curve analysis</td>
+<td>A user can initialize, load, and segment a real light curve.</td>
+<td>P1, P2, P7</td>
+<td>Active: P1 started</td>
+</tr>
+<tr>
+<td>M2 — Reproducible measurement model</td>
+<td>A validated empirical measurement model can be rebuilt or loaded.</td>
+<td>P3, P7</td>
+<td>Planned</td>
+</tr>
+<tr>
+<td>M3 — CPU simulation reference</td>
+<td>Deterministic small-scale simulations are scientifically validated.</td>
+<td>P4, P7</td>
+<td>Planned</td>
+</tr>
+<tr>
+<td>M4 — JAX/GPU acceleration</td>
+<td>Accelerated simulation is available with NumPy parity.</td>
+<td>P5, P7</td>
+<td>Planned</td>
+</tr>
+<tr>
+<td>M5 — Trial engine and reproduction</td>
+<td>Studies resume safely and archived results are reproducible.</td>
+<td>P6, P7</td>
+<td>Planned</td>
+</tr>
+<tr>
+<td>M6 — Community release</td>
+<td>Tutorials, contribution material, releases, and archival references are complete.</td>
+<td>P7</td>
+<td>Planned</td>
+</tr>
+</tbody>
+</table>
+<h2 id="progress">Progress<a class="headerlink" href="#progress" title="Permanent link">&para;</a></h2>
+<p>P0's terminology, units, established defaults, provenance boundary, and <code>OLD2</code>
+migration inventory are recorded in the tracked <a href="../scientific-contract/">scientific contract</a>
+and <a href="../migration-map/">legacy migration map</a>. The next implementation slice is
+P1's pure Bayesian-block numerical API; it must consume this contract without
+adding cache, CLI, plotting, or flare-classification behavior.</p>
+<h2 id="implementation-workstreams">Implementation workstreams<a class="headerlink" href="#implementation-workstreams" title="Permanent link">&para;</a></h2>
+<h3 id="p0-scientific-contract-and-migration-inventory">P0 — Scientific contract and migration inventory<a class="headerlink" href="#p0-scientific-contract-and-migration-inventory" title="Permanent link">&para;</a></h3>
+<p>Establish the vocabulary, equations, units, defaults, and provenance rules before adding more algorithms.</p>
+<ul>
+<li>Use <code>true_flux</code> (<span class="arithmatex">\(F_R\)</span>), <code>measured_flux</code> (<span class="arithmatex">\(F_m\)</span>), <code>measurement_uncertainty</code> (<span class="arithmatex">\(\sigma_m\)</span>),
+  <code>quiescent_flux</code> (<span class="arithmatex">\(F_Q\)</span>), <code>flare_peak_flux</code> (<span class="arithmatex">\(F_0\)</span>), <code>flare_center</code>, <code>flare_width_days</code> (<span class="arithmatex">\(W=2\sigma\)</span>), and
+  <code>ncp_prior</code>.</li>
+<li>Define energy-flux units as <span class="arithmatex">\(\mathrm{erg\,cm^{-2}\,s^{-1}}\)</span>, time as Fermi MET seconds for observed data, and elapsed
+  days for simulations.</li>
+<li>Record the paper defaults: daily LCR product (three-day bins), energy flux, fixed spectral index, TS <span class="arithmatex">\(\geq 19\)</span>,
+  log-normal Bayesian-block fitness, measurement errors enabled, and NCP prior 10.</li>
+<li>Create a tracked migration map classifying each <code>OLD2</code> component as migrated, pending validation, exploratory, or
+  unrelated.</li>
+<li>Explicitly mark longest-block, k-means, hard-coded-threshold, and HOP approaches as unvalidated exploratory work.</li>
+</ul>
+<p>Completion goals:</p>
+<ul>
+<li>Every public quantity has one canonical Python name, mathematical symbol, unit, and definition.</li>
+<li>Defaults in code, README, tutorials, and generated API reference agree.</li>
+<li>The migration map accounts for all FLARE-BB-relevant <code>OLD2</code> scripts and notebooks.</li>
+<li>No production feature depends on <code>/paper</code> at runtime or in CI.</li>
+</ul>
+<h3 id="p1-analysis-first-numerical-core">P1 — Analysis-first numerical core<a class="headerlink" href="#p1-analysis-first-numerical-core" title="Permanent link">&para;</a></h3>
+<p>Implement the package's namesake Bayesian-block operation as a pure, typed numerical API.</p>
+<p>Public interfaces:</p>
+<ul>
+<li><code>BayesianBlocksConfig</code> with defaults <code>ncp_prior=10</code>, <code>distribution="log_normal"</code>, and
+  <code>use_measurement_uncertainty=True</code>.</li>
+<li><code>BayesianBlocksResult</code> containing edges, block means, block standard deviations, sample counts, and per-sample block
+  indices.</li>
+<li><code>analyze_light_curve(times, measured_flux, measurement_uncertainty, config=...)</code>.</li>
+<li>A typed <code>LightCurveData</code> representation independent of pyLCR internals.</li>
+</ul>
+<p>Behavior:</p>
+<ul>
+<li>Apply the paper's log-normal transformation:</li>
+</ul>
+<p>$$
+  \begin{aligned}
+  \sigma &amp;= \ln(F_m+\sigma_m)-\ln(F_m), \
+  \mu &amp;= \ln(F_m)-\frac{\sigma^2}{2}.
+  \end{aligned}
+  $$</p>
+<ul>
+<li>Require finite, one-dimensional, equal-length arrays; strictly increasing times; and positive flux and uncertainty
+  for log-normal analysis.</li>
+<li>Include a measurement on the final Bayesian-block edge in the final block.</li>
+<li>Return one statistic per block without the legacy leading-zero sentinel.</li>
+<li>Do not automatically label real-data blocks as flares. An explicit user threshold may be plotted, but automatic
+  quiescent-level estimation remains out of scope until scientifically validated.</li>
+</ul>
+<p>Completion goals:</p>
+<ul>
+<li>Synthetic constant and change-point fixtures produce expected block edges.</li>
+<li>Normal and log-normal modes agree with direct Astropy reference calls.</li>
+<li>Regression fixtures characterize legacy behavior and document intentional corrections.</li>
+<li>A network-free cached real-light-curve fixture can be analyzed and plotted.</li>
+<li>Unit tests cover invalid shapes, ordering, non-finite values, non-positive log inputs, missing errors, and final-edge
+  membership.</li>
+</ul>
+<h3 id="p2-explicit-initialization-and-stable-light-curve-cache">P2 — Explicit initialization and stable light-curve cache<a class="headerlink" href="#p2-explicit-initialization-and-stable-light-curve-cache" title="Permanent link">&para;</a></h3>
+<p>Replace ad hoc scripts and pickle-dependent storage with a single, documented initialization workflow.</p>
+<p>Public CLI:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>flare-bb init
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>flare-bb init --artifact-set paper-v1
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>flare-bb init --from-live
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>flare-bb init --source &quot;4FGL J...&quot;
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>flare-bb init --warm-jax
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>flare-bb status
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>flare-bb analyze &quot;4FGL J...&quot; [--plot output.pdf]
+</span></code></pre></div>
+<p>Implementation:</p>
+<ul>
+<li>Add a unified <code>flare-bb</code> entry point; keep existing scripts temporarily as compatible wrappers.</li>
+<li>Default to a platform-appropriate user cache, overridable by <code>--cache-dir</code> and <code>FLARE_BB_CACHE_DIR</code>.</li>
+<li>Store standardized light curves in versioned HDF5 rather than pickle. Preserve source, query parameters, MET values,
+  measured flux, asymmetric flux bounds, TS, fit-convergence information, and derived <span class="arithmatex">\(\sigma_m\)</span>.</li>
+<li>Make initialization resumable, idempotent, lock-protected, and atomic.</li>
+<li>Verify archive downloads with SHA-256 checksums and byte sizes.</li>
+<li>Provide an archived <code>paper-v1</code> snapshot for exact reproduction and an explicitly non-reproducible live rebuild path.</li>
+<li>For live rebuilding, apply a named, documented cleaning policy and verify that the archived paper dataset reproduces
+  the expected 77,992 retained measurements.</li>
+<li>Instantiate SciPy interpolators from stored numerical grids at runtime; <code>--warm-jax</code> additionally prepares the
+  persistent JAX compilation cache.</li>
+</ul>
+<p>Completion goals:</p>
+<ul>
+<li>Running <code>flare-bb init</code> twice performs no unnecessary download or recomputation.</li>
+<li>Interrupted downloads and builds resume safely.</li>
+<li>Corrupt artifacts are detected before use and replaced only with an explicit repair or reinitialization action.</li>
+<li><code>flare-bb status</code> reports cache location, artifact versions, checksums, query configuration, and readiness for
+  analysis and simulation.</li>
+<li>README and getting-started documentation require initialization explicitly before real-data examples.</li>
+<li>No normal public workflow requires repository-local <code>data/</code> paths.</li>
+</ul>
+<h3 id="p3-measurement-model-and-spline-hardening">P3 — Measurement-model and spline hardening<a class="headerlink" href="#p3-measurement-model-and-spline-hardening" title="Permanent link">&para;</a></h3>
+<p>Promote the existing KDE and posterior implementation from a working reconstruction to a validated scientific model.</p>
+<ul>
+<li>Audit likelihood, Jacobians, KDE normalization, marginal likelihood, interpolation axes, and posterior normalization
+  against the paper.</li>
+<li>Evolve the HDF5 format to store explicit one-dimensional axes, precision, artifact schema version, source-data
+  checksum, configuration, package version, and creation timestamp.</li>
+<li>Retain read compatibility with existing format-version-1 artifacts.</li>
+<li>Build a <code>MeasurementModel</code> from the distribution artifact, providing PDF evaluation, normalized conditional slices,
+  and sampling.</li>
+<li>Reproduce the lost NPZ workflow only as a validation and import tool; the public implementation uses versioned HDF5.</li>
+<li>Re-run the missing KDE bandwidth study at 0.1, 0.2, and 0.3 decades and archive its numerical summary.</li>
+<li>Separate archive-derived artifacts from live-derived artifacts so they can never be mistaken for one another.</li>
+</ul>
+<p>Completion goals:</p>
+<ul>
+<li>Prior, marginal-likelihood, and posterior normalization errors meet documented numerical tolerances across the
+  configured domain.</li>
+<li>The archived dataset reproduces the expected sample count and paper grid ranges.</li>
+<li>HDF5 round trips preserve arrays, metadata, and checksums.</li>
+<li>Runtime SciPy splines reproduce stored grid values and legacy NPZ interpolation within tolerance.</li>
+<li>The bandwidth claim is supported by a reproducible script, configuration, and result artifact.</li>
+</ul>
+<h3 id="p4-reproducible-cpu-simulation-reference">P4 — Reproducible CPU simulation reference<a class="headerlink" href="#p4-reproducible-cpu-simulation-reference" title="Permanent link">&para;</a></h3>
+<p>Implement a clear NumPy and SciPy reference simulator before GPU acceleration.</p>
+<p>Public interfaces:</p>
+<ul>
+<li><code>SimulationConfig</code>, <code>QuiescentBackground</code>, and <code>GaussianFlare</code>.</li>
+<li><code>simulate_true_flux(times, events)</code>.</li>
+<li><code>MeasurementModel.sample(true_flux, rng=...)</code>.</li>
+<li><code>simulate_light_curve(config, measurement_model, seed, backend="auto")</code>.</li>
+<li><code>DetectionConfig</code> and simulation-only detection and evaluation results.</li>
+</ul>
+<p>Behavior:</p>
+<ul>
+<li>Implement:</li>
+</ul>
+<p>$$
+  F_R(t)=F_Q+F_0\exp\left[-\frac{(t-t_0)^2}{2(W/2)^2}\right].
+  $$</p>
+<ul>
+<li>Preserve the paper benchmark profile: 1,460 daily samples, the three <span class="arithmatex">\(F_Q\)</span>, <span class="arithmatex">\(F_0\)</span>, and <span class="arithmatex">\(W\)</span> values, and NCP priors
+  5–12.</li>
+<li>Derive the one-standard-deviation detection threshold from moments of <span class="arithmatex">\(p(F_m,\sigma_m\mid F_Q)\)</span>, replacing the
+  legacy hard-coded three-value lookup.</li>
+<li>Merge consecutive above-threshold blocks into one detection.</li>
+<li>Count a true positive when a detection contains an injected flare center; count unmatched detections as false
+  positives and unmatched injections as false negatives.</li>
+<li>Use explicit seeded <code>numpy.random.Generator</code> instances; never use hidden global random state.</li>
+</ul>
+<p>Completion goals:</p>
+<ul>
+<li>Identical configuration, artifact checksum, and seed produce byte-identical CPU outputs.</li>
+<li>Gaussian-event values match the analytical equation at the center and selected offsets.</li>
+<li>Conditional samples reproduce reference PDF moments and quantiles within statistical tolerances.</li>
+<li>Detection matching covers boundary centers, consecutive blocks, multiple injected flares, no-flare curves, and
+  overlapping detections.</li>
+<li>CPU simulation emits one prominent acceleration warning per process explaining that it is suitable for validation
+  and small examples, not paper-scale studies.</li>
+</ul>
+<h3 id="p5-optional-jaxgpu-backend">P5 — Optional JAX/GPU backend<a class="headerlink" href="#p5-optional-jaxgpu-backend" title="Permanent link">&para;</a></h3>
+<p>Add JAX as an optional accelerator without making scientific correctness depend on it.</p>
+<ul>
+<li>Add an optional JAX dependency extra; document current official CUDA installation separately because GPU wheels are
+  platform-specific.</li>
+<li><code>backend="auto"</code> selects JAX only when a GPU device is available; otherwise it selects NumPy and emits
+  <code>AccelerationWarning</code> once per process.</li>
+<li>Explicit <code>backend="jax"</code> may run on CPU but must report the device and emit the same warning when no GPU is present.</li>
+<li>Expose a diagnostic API and CLI showing JAX version, devices, platform, precision, and compilation-cache path.</li>
+<li>Use explicit split JAX PRNG keys, <code>jit</code>, <code>vmap</code>, chunked batches, and a persistent compilation cache.</li>
+<li>Avoid import-time artifact loading, import-time compilation, fixed 1,460-element function signatures, and repeated
+  host and device transfers.</li>
+<li>Default accelerated simulation to float32, record precision in provenance, and validate against the float64 NumPy
+  reference.</li>
+</ul>
+<p>Completion goals:</p>
+<ul>
+<li>NumPy and JAX evaluate equivalent normalized conditional distributions.</li>
+<li>Statistical sample moments and quantiles agree within defined tolerances.</li>
+<li>Standard CI runs optional JAX tests on CPU; a separate GPU smoke and benchmark workflow runs on designated hardware.</li>
+<li>On the project RTX 3070 Ti, the new sampler reaches at least 80% of the rebuilt legacy JAX sampler's throughput and
+  at least 100 times the NumPy reference for the paper-shaped workload.</li>
+<li>README states plainly that the historical implementation observed roughly 1,200 times acceleration, that exact
+  speedup is hardware-dependent, and that approximately two million paper-scale simulations are not practical on the
+  CPU reference backend.</li>
+</ul>
+<h3 id="p6-resumable-trial-engine-and-paper-reproduction">P6 — Resumable trial engine and paper reproduction<a class="headerlink" href="#p6-resumable-trial-engine-and-paper-reproduction" title="Permanent link">&para;</a></h3>
+<p>Build the publication-scale workflow after single simulations are validated.</p>
+<ul>
+<li>Stream simulations in bounded GPU batches and send Bayesian-block analysis to bounded CPU worker pools.</li>
+<li>Generate deterministic seed schedules from a recorded root seed; reuse each simulated light curve across NCP priors
+  5–12.</li>
+<li>Store chunked, appendable HDF5 trial results with configuration, seed, artifact checksum, backend and device,
+  precision, software versions, completion state, and failure records.</li>
+<li>Support interruption, resume, shard execution, shard merging, and per-configuration progress reporting.</li>
+<li>Aggregate accuracy and error rate with the paper's Beta treatment and false-positive rate with its Gamma or Poisson
+  treatment.</li>
+<li>Generate paper-equivalent tables and figures from result artifacts rather than MongoDB or notebook state.</li>
+<li>Freeze the final <code>paper-v1</code> trial manifest only after the authors reconcile the paper's “two million light curves”
+  statement with the available legacy result archive.</li>
+</ul>
+<p>Completion goals:</p>
+<ul>
+<li>A reduced CI profile reproduces the entire workflow deterministically.</li>
+<li>Interrupted and resumed runs equal uninterrupted runs.</li>
+<li>Sharded and unsharded aggregation produce identical summaries.</li>
+<li>The author-approved paper manifest fixes every parameter, seed policy, trial count, artifact checksum, and figure
+  recipe.</li>
+<li>All publication figures can be regenerated from an empty output directory using the archived inputs and one
+  documented command.</li>
+</ul>
+<h3 id="p7-documentation-tutorials-and-community-release">P7 — Documentation, tutorials, and community release<a class="headerlink" href="#p7-documentation-tutorials-and-community-release" title="Permanent link">&para;</a></h3>
+<p>Develop documentation alongside each functional slice.</p>
+<ul>
+<li>README: installation, mandatory initialization, analysis-first quickstart, cache and status commands, optional JAX
+  and GPU setup, CPU warning, project maturity, and links to tutorials.</li>
+<li>Tutorials: initialize data; analyze and plot one real Fermi light curve; rebuild the measurement model; simulate one
+  seeded flare; compare NumPy and JAX; run and resume a reduced NCP scan; reproduce archived results.</li>
+<li>Explanation pages: terminology and units; Bayesian-block transformation; measurement model; Gaussian simulation
+  convention; detection metrics; artifact provenance; GPU performance limitations.</li>
+<li>Auto-generate API reference from NumPy docstrings and keep hand-written pages focused on scientific reasoning.</li>
+<li>Add contribution guidance, a citation file, release notes, artifact DOI references, and a reproducibility checklist.</li>
+</ul>
+<p>Completion goals:</p>
+<ul>
+<li>Every documented command and code example is exercised by automated smoke tests.</li>
+<li><code>mkdocs build --strict</code> passes with no broken references.</li>
+<li>A new user can initialize, analyze a cached source, and produce a Bayesian-block plot using only README instructions.</li>
+<li>A GPU user can verify device selection before launching a trial.</li>
+<li>Documentation never claims automatic real-data flare classification until a validated quiescent estimator exists.</li>
+</ul>
+<h2 id="test-and-release-gates">Test and release gates<a class="headerlink" href="#test-and-release-gates" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Keep Ruff, formatting, strict mypy, warnings-as-errors, and at least 80% branch coverage as mandatory gates.</li>
+<li>Add unit tests for pure math; golden regression tests for archived fixtures; artifact-schema and corruption tests;
+  offline CLI integration tests; statistical sampler tests; CPU and JAX parity tests; and non-blocking hardware
+  benchmarks.</li>
+<li>Network access is never required by the standard test suite. Live Fermi tests run separately on a schedule and report
+  upstream schema or API drift.</li>
+<li>Test supported Python versions in CI and maintain one environment lock or equivalent resolved dependency record for
+  paper reproduction.</li>
+<li>Preserve existing public APIs and format-version-1 readers during the roadmap; deprecations require warnings,
+  documentation, and a migration path.</li>
+</ul>
+<h2 id="immediate-agent-facing-sequence">Immediate agent-facing sequence<a class="headerlink" href="#immediate-agent-facing-sequence" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Implement the pure Bayesian-block core and its regression and edge-case tests.</li>
+<li>Introduce <code>LightCurveData</code> and stable HDF5 light-curve serialization.</li>
+<li>Add <code>flare-bb init</code>, <code>flare-bb status</code>, and archive-manifest and checksum handling.</li>
+<li>Add <code>flare-bb analyze</code>, plotting, README initialization instructions, and the first real-data tutorial.</li>
+<li>Only after that analysis milestone passes all gates, harden the measurement model and begin CPU simulation, followed
+   by JAX and GPU acceleration.</li>
+</ol>
+<h2 id="assumptions">Assumptions<a class="headerlink" href="#assumptions" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>/paper</code> remains ignored and private until the authors decide an arXiv-ready version can be public.</li>
+<li>The authors will provide or approve the DOI-backed <code>paper-v1</code> archive and final trial manifest before the
+  reproduction release.</li>
+<li>NCP prior 10, log-normal fitness, measurement errors enabled, energy flux, fixed index, and TS <span class="arithmatex">\(\geq 19\)</span> are the
+  established defaults.</li>
+<li>Real-data output is segmentation only; automatic flare labeling is deferred.</li>
+<li>NumPy is the correctness reference, while JAX and GPU are the expected backend for large simulations.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.annotate", "navigation.indexes", "navigation.sections", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

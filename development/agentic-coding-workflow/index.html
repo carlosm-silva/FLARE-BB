@@ -1,0 +1,1486 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../implementation-roadmap/">
+      
+      
+        <link rel="next" href="../../reference/flare_bb/core/config/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Agentic Coding Workflow - FLARE-BB</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#agentic-coding-delivery-workflow" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="FLARE-BB" class="md-header__button md-logo" aria-label="FLARE-BB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FLARE-BB
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Agentic Coding Workflow
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="FLARE-BB" class="md-nav__button md-logo" aria-label="FLARE-BB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    FLARE-BB
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../measurement-model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Measurement Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scientific-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scientific Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Legacy Migration Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../implementation-roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agentic Coding Workflow
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agentic Coding Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#delivery-hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delivery hierarchy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pull-request-cadence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pull request cadence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#milestone-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Milestone sequence
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Milestone sequence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#m0-scientific-contract-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M0 — Scientific contract — complete
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m1-real-light-curve-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M1 — Real-light-curve analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m2-reproducible-measurement-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M2 — Reproducible measurement model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m3-cpu-simulation-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M3 — CPU simulation reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m4-jax-and-gpu-acceleration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M4 — JAX and GPU acceleration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m5-trial-engine-and-paper-reproduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M5 — Trial engine and paper reproduction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m6-community-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M6 — Community release
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-task-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent task contract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#review-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branch-and-commit-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Branch and commit policy
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/flare_bb/core/config/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/flare_bb/core/distributions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Distributions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/flare_bb/core/kde/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KDE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/flare_bb/io/catalog/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Io
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Io
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/flare_bb/io/filenames/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filenames
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/flare_bb/io/hdf5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HDF5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/flare_bb/io/lcr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LCR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/flare_bb/pipeline/distributions/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pipeline
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/flare_bb/pipeline/kde/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KDE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#delivery-hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delivery hierarchy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pull-request-cadence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pull request cadence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#milestone-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Milestone sequence
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Milestone sequence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#m0-scientific-contract-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M0 — Scientific contract — complete
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m1-real-light-curve-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M1 — Real-light-curve analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m2-reproducible-measurement-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M2 — Reproducible measurement model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m3-cpu-simulation-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M3 — CPU simulation reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m4-jax-and-gpu-acceleration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M4 — JAX and GPU acceleration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m5-trial-engine-and-paper-reproduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M5 — Trial engine and paper reproduction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#m6-community-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M6 — Community release
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-task-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent task contract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#review-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branch-and-commit-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Branch and commit policy
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="agentic-coding-delivery-workflow">Agentic Coding Delivery Workflow<a class="headerlink" href="#agentic-coding-delivery-workflow" title="Permanent link">&para;</a></h1>
+<p>This document defines how agents should deliver the
+<a href="../implementation-roadmap/">FLARE-BB implementation roadmap</a>. The central rule is to organize work around user-facing
+milestones while implementing each milestone through small, independently reviewable pull requests.</p>
+<h2 id="delivery-hierarchy">Delivery hierarchy<a class="headerlink" href="#delivery-hierarchy" title="Permanent link">&para;</a></h2>
+<p>Use four levels of planning:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Roadmap workstream (P0--P7): technical scope
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>└── GitHub milestone (M0--M6): user-facing capability
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    └── Issue: independently reviewable deliverable
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        └── Short-lived branch and pull request
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>            └── Atomic working commits
+</span></code></pre></div>
+<p>P-numbered workstreams define the scientific and technical scope of work. M-numbered milestones are the only progress
+standard: they describe what a user can do when the milestone is complete. A milestone is not a branch and can span
+several workstreams; each pull request should name both its milestone and its primary workstream, and leave <code>main</code>
+usable, tested, and scientifically coherent.</p>
+<h2 id="pull-request-cadence">Pull request cadence<a class="headerlink" href="#pull-request-cadence" title="Permanent link">&para;</a></h2>
+<p>For each issue:</p>
+<ol>
+<li>Create a short-lived <code>type/short-description</code> branch from the latest <code>main</code>.</li>
+<li>State the user outcome, acceptance criteria, and explicit non-goals.</li>
+<li>Characterize relevant legacy behavior with tests before restructuring it.</li>
+<li>Implement the smallest complete vertical slice.</li>
+<li>Add or update documentation in the same pull request.</li>
+<li>Run <code>just check</code> and, when documentation changes, <code>just docs-build</code>.</li>
+<li>Review the complete diff for unrelated edits, hidden assumptions, and accidental data or secrets.</li>
+<li>Open a focused pull request with a Conventional Commit title.</li>
+<li>Squash-merge only after CI and scientific review pass.</li>
+<li>Delete the branch and start the next issue from the updated <code>main</code>.</li>
+</ol>
+<p>Working commits should remain understandable and preferably pass the project gate, but the pull request title and
+description deserve the most care because they become the commit on <code>main</code>.</p>
+<h2 id="milestone-sequence">Milestone sequence<a class="headerlink" href="#milestone-sequence" title="Permanent link">&para;</a></h2>
+<h3 id="m0-scientific-contract-complete">M0 — Scientific contract — complete<a class="headerlink" href="#m0-scientific-contract-complete" title="Permanent link">&para;</a></h3>
+<p>P0 established the tracked terminology, defaults, provenance boundary, and legacy migration map required by all later
+work.</p>
+<h3 id="m1-real-light-curve-analysis">M1 — Real-light-curve analysis<a class="headerlink" href="#m1-real-light-curve-analysis" title="Permanent link">&para;</a></h3>
+<p>The first user-facing milestone is complete when a new user can initialize data, load a real Fermi light curve, and
+produce its Bayesian-block representation using only the README.</p>
+<p>Suggested pull requests:</p>
+<ol>
+<li><code>M0 / P0 — docs/scientific-contract</code> — completed</li>
+<li>Establish terminology, units, paper-backed defaults, and the legacy migration map.</li>
+<li><code>M1 / P1 — feat/bayesian-block-analysis</code> — active</li>
+<li>Add the pure configuration, result, and analysis API with synthetic and regression tests.</li>
+<li><code>M1 / P2 — feat/light-curve-data</code></li>
+<li>Add the typed light-curve representation, pyLCR adapter, stable HDF5 schema, and offline fixtures.</li>
+<li><code>M1 / P2 — feat/cache-initialization</code></li>
+<li>Add initialization and status commands, manifests, checksums, and idempotent caching.</li>
+<li><code>M1 / P2,P7 — feat/light-curve-analysis-cli</code></li>
+<li>Add the analysis command, visualization, analysis-first quickstart, and real-data tutorial.</li>
+</ol>
+<h3 id="m2-reproducible-measurement-model">M2 — Reproducible measurement model<a class="headerlink" href="#m2-reproducible-measurement-model" title="Permanent link">&para;</a></h3>
+<p>Deliver numerical validation, a versioned artifact schema, runtime spline construction, the bandwidth study, and the
+archived <code>paper-v1</code> artifact as separate reviewable changes.</p>
+<p>Completion means the empirical posterior can be rebuilt or downloaded, verified, loaded, and evaluated reproducibly.</p>
+<h3 id="m3-cpu-simulation-reference">M3 — CPU simulation reference<a class="headerlink" href="#m3-cpu-simulation-reference" title="Permanent link">&para;</a></h3>
+<p>Separate true-flux events, the NumPy conditional sampler, seeded light-curve simulation, simulation-only flare
+classification, detection metrics, and the tutorial where practical.</p>
+<p>Completion establishes the correctness reference. It does not imply that publication-scale simulation is practical on
+the CPU.</p>
+<h3 id="m4-jax-and-gpu-acceleration">M4 — JAX and GPU acceleration<a class="headerlink" href="#m4-jax-and-gpu-acceleration" title="Permanent link">&para;</a></h3>
+<p>Deliver accelerator support incrementally:</p>
+<ol>
+<li>Backend discovery and diagnostics.</li>
+<li>JAX PDF evaluation with NumPy parity.</li>
+<li>JAX sampling with statistical parity.</li>
+<li>Batched simulation and persistent compilation caching.</li>
+<li>GPU benchmarking and performance documentation.</li>
+</ol>
+<p>Do not combine the JAX dependency, simulation rewrite, and publication-scale trial execution in one pull request. Each
+kernel must be validated against the NumPy reference before the next optimization lands.</p>
+<h3 id="m5-trial-engine-and-paper-reproduction">M5 — Trial engine and paper reproduction<a class="headerlink" href="#m5-trial-engine-and-paper-reproduction" title="Permanent link">&para;</a></h3>
+<p>Implement checkpointing, sharding, aggregation, plotting, and the final paper profile separately. The final large run
+should use already-reviewed and merged software; it should not double as development or debugging.</p>
+<h3 id="m6-community-release">M6 — Community release<a class="headerlink" href="#m6-community-release" title="Permanent link">&para;</a></h3>
+<p>Complete the remaining P7 documentation, contribution and release guidance, citation and archival references, and the
+reproducibility checklist after the functional milestones are stable.</p>
+<h2 id="agent-task-contract">Agent task contract<a class="headerlink" href="#agent-task-contract" title="Permanent link">&para;</a></h2>
+<p>Give an implementation agent one issue at a time. Every task should state:</p>
+<ul>
+<li>the exact user outcome;</li>
+<li>the relevant roadmap objective;</li>
+<li>public interfaces to add or preserve;</li>
+<li>scientific equations, units, terminology, and defaults;</li>
+<li>required tests and numerical acceptance criteria;</li>
+<li>required documentation;</li>
+<li>explicit exclusions; and</li>
+<li>commands that must pass before handoff.</li>
+</ul>
+<p>A well-bounded task looks like:</p>
+<blockquote>
+<p>Implement the pure Bayesian-block numerical API described in P1. Do not add caching, CLI behavior, plotting, or
+flare classification. Match the paper defaults, characterize legacy behavior, correct final-edge membership, and
+make <code>just check</code> pass.</p>
+</blockquote>
+<p>Avoid tasks such as “implement Bayesian Blocks and start the simulator,” which combine unrelated decisions and make
+scientific review difficult.</p>
+<h2 id="review-responsibilities">Review responsibilities<a class="headerlink" href="#review-responsibilities" title="Permanent link">&para;</a></h2>
+<p>Numerical changes require two distinct reviews:</p>
+<ul>
+<li><strong>Engineering review:</strong> interfaces, typing, tests, error handling, performance, data formats, and maintainability.</li>
+<li><strong>Scientific review:</strong> equations, transformations, units, defaults, statistical interpretation, and consistency with
+  the paper.</li>
+</ul>
+<p>For high-risk numerical work, use a fresh review pass that did not participate in the implementation. The reviewer
+should inspect the final diff and acceptance evidence rather than relying on the implementing agent's summary.</p>
+<h2 id="branch-and-commit-policy">Branch and commit policy<a class="headerlink" href="#branch-and-commit-policy" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Use lightweight GitHub Flow: branch, pull request, CI, squash-merge, delete branch.</li>
+<li>Keep branches short-lived and limited to one issue.</li>
+<li>Use Conventional Commit titles, such as <code>feat(analysis): add Bayesian-block segmentation</code>.</li>
+<li>Stage deliberately; never stage the entire worktree without inspecting it.</li>
+<li>Rebase a stale branch on the latest <code>origin/main</code> before final review.</li>
+<li>Do not bypass failing checks, warnings, coverage gates, or strict documentation builds.</li>
+<li>Direct commits to <code>main</code> are reserved for genuinely trivial, low-risk corrections.</li>
+</ul>
+<p>This workflow keeps the repository usable throughout the migration, preserves clear scientific review boundaries, and
+gives agents tasks small enough to implement and verify reliably.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.annotate", "navigation.indexes", "navigation.sections", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -57,6 +57,13 @@ extra_javascript:
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 nav:
-  - "*.md"
+  - Home: index.md
+  - Usage: usage.md
+  - Measurement Model: measurement-model.md
+  - Development:
+      - Scientific Contract: development/scientific-contract.md
+      - Legacy Migration Map: development/migration-map.md
+      - Implementation Roadmap: development/implementation-roadmap.md
+      - Agentic Coding Workflow: development/agentic-coding-workflow.md
   - API Reference:
       - reference/flare_bb/**

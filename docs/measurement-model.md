@@ -2,6 +2,14 @@
 
 FLARE-BB models each Fermi-LAT observation as a measured flux/error pair $(F_m, \sigma_m)$ conditioned on an underlying true flux $F_R$.
 
+For a detected observation, pyLCR exposes `flux_error` as the endpoints
+$(F_m - \sigma_m, F_m + \sigma_m)$. Here $\sigma_m$ is the Fermi-LAT Light
+Curve Repository's 1-sigma symmetric Gaussian-equivalent statistical
+uncertainty, computed from the inverse Hessian at the optimum of the
+log-likelihood surface. It is not a separately constructed 68%
+profile-likelihood confidence interval; 68.3% coverage is only the Gaussian
+approximation associated with a one-standard-deviation error.
+
 The posterior used by the distribution builder is
 
 $$

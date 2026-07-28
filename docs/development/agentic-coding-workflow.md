@@ -46,7 +46,7 @@ produce its Bayesian-block representation using only the README.
 
 Suggested pull requests:
 
-1. `docs/scientific-contract`
+1. `docs/scientific-contract` — completed
    - Establish terminology, units, paper-backed defaults, and the legacy migration map.
 2. `feat/bayesian-block-analysis`
    - Add the pure configuration, result, and analysis API with synthetic and regression tests.

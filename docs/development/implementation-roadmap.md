@@ -13,6 +13,14 @@ The long-term product will let scientists:
 The local `/paper` tree remains ignored and private. Its terminology and equations inform implementation, but stable
 conventions will be rewritten into tracked documentation without exposing unpublished paper text.
 
+## Progress
+
+P0's terminology, units, established defaults, provenance boundary, and `OLD2`
+migration inventory are recorded in the tracked [scientific contract](scientific-contract.md)
+and [legacy migration map](migration-map.md). The next implementation slice is
+P1's pure Bayesian-block numerical API; it must consume this contract without
+adding cache, CLI, plotting, or flare-classification behavior.
+
 ## Prioritized objectives
 
 ### P0 — Scientific contract and migration inventory
@@ -269,12 +277,11 @@ Completion goals:
 
 ## Immediate agent-facing sequence
 
-1. Implement P0 terminology and configuration contracts and the migration map.
-2. Implement the pure Bayesian-block core and its regression and edge-case tests.
-3. Introduce `LightCurveData` and stable HDF5 light-curve serialization.
-4. Add `flare-bb init`, `flare-bb status`, and archive-manifest and checksum handling.
-5. Add `flare-bb analyze`, plotting, README initialization instructions, and the first real-data tutorial.
-6. Only after that analysis milestone passes all gates, harden the measurement model and begin CPU simulation, followed
+1. Implement the pure Bayesian-block core and its regression and edge-case tests.
+2. Introduce `LightCurveData` and stable HDF5 light-curve serialization.
+3. Add `flare-bb init`, `flare-bb status`, and archive-manifest and checksum handling.
+4. Add `flare-bb analyze`, plotting, README initialization instructions, and the first real-data tutorial.
+5. Only after that analysis milestone passes all gates, harden the measurement model and begin CPU simulation, followed
    by JAX and GPU acceleration.
 
 ## Assumptions

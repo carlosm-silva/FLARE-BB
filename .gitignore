@@ -27,5 +27,10 @@ site/
 # Local environment / secrets
 .env
 
+# Local reference archive
+OLD/
+OLD2/
+paper/
+
 # OS files
 .DS_Store

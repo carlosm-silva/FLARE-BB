@@ -25,6 +25,9 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/flare_bb"]
 
+[tool.hatch.metadata]
+allow-direct-references = true
+
 # ------------------------------------------------------------------------------
 # PROJECT METADATA
 # ------------------------------------------------------------------------------
@@ -50,6 +53,7 @@ dependencies = [
     "astropy>=6.0",
     "pandas>=2.2",
     "tqdm>=4.66",
+    "pyLCR @ git+https://github.com/carlosm-silva/pyLCR.git@27f66ac76ce18f553fa0c4bc637e5461faa7591d",
 ]
 
 # Optional dependency groups — install with: pip install -e ".[dev]" or ".[docs]"

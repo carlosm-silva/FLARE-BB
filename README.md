@@ -1,12 +1,18 @@
 # FLARE-BB
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 FLARE-BB (**F**ermi **L**AT **A**daptive **R**esolution **E**nhancement with **B**ayesian **B**locks) provides tools for modeling Fermi-LAT measured flux/error behavior and building posterior flux distributions for flare analysis.
 
 The package is organized around a modern `src/` layout:
 
 - `flare_bb.core` contains pure numerical KDE and Bayesian distribution code.
-- `flare_bb.io` contains HDF5, catalog, and optional Fermi LCR adapters.
+- `flare_bb.io` contains HDF5, catalog, and Fermi LCR adapters.
 - `flare_bb.pipeline` contains workflow orchestration used by command-line scripts.
+
+## Documentation
+
+The full documentation is available at [carlosm-silva.github.io/FLARE-BB](https://carlosm-silva.github.io/FLARE-BB/). It includes usage guidance, the measurement model, and an API reference generated from the package source.
 
 ## Installation
 
@@ -37,7 +43,7 @@ python scripts/build_distributions.py --final-bins 64 --ml-resolution 32 --hd-re
 python scripts/inspect_kde.py data/cache/kde/<kde-file>.h5
 ```
 
-Fermi LAT Light Curve Repository downloads require `pyLCR`. That dependency is intentionally optional until a pinned fork/tag is configured.
+Fermi LAT Light Curve Repository downloads use a temporary, commit-pinned dependency on the project's [`pyLCR` fork](https://github.com/carlosm-silva/pyLCR).
 
 ## Development
 
@@ -50,4 +56,15 @@ just fix         # Ruff auto-fix and format
 
 ## License
 
-FLARE-BB is licensed under GPL-3.0-or-later.
+FLARE-BB is licensed under the GNU General Public License v3.0 or later. See the [full license](https://github.com/carlosm-silva/FLARE-BB/blob/main/LICENSE) for details.
+
+## Disclaimer
+
+This software is provided "as is" without warranty of any kind. The authors provide no technical support, maintenance, or assistance with this software. Use at your own risk.
+
+## Contact
+
+For questions or inquiries, contact the authors:
+
+- Carlos Márcio de Oliveira e Silva Filho ([cfilho3@gatech.edu](mailto:cfilho3@gatech.edu))
+- Ignacio Taboada ([itaboada@gatech.edu](mailto:itaboada@gatech.edu))

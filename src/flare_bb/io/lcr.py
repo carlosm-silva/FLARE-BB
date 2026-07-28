@@ -1,4 +1,4 @@
-"""Optional Fermi LAT Light Curve Repository integration."""
+"""Fermi LAT Light Curve Repository integration."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ from typing import Any
 
 
 class MissingPyLcrError(ImportError):
-    """Raised when optional pyLCR functionality is requested without pyLCR."""
+    """Raised when the pyLCR runtime dependency is unavailable."""
 
 
 @dataclass(frozen=True)
@@ -207,7 +207,7 @@ def download_light_curve(request: LightCurveRequest, *, pylcr: Any, max_attempts
 
 
 def import_pylcr() -> Any:
-    """Import pyLCR or raise a clear optional-dependency error.
+    """Import pyLCR or raise a clear dependency error.
 
     Returns
     -------
@@ -219,6 +219,6 @@ def import_pylcr() -> Any:
     except ImportError as error:
         raise MissingPyLcrError(
             "pyLCR is required for Fermi LCR download/caching features. "
-            "Install the project with a pinned pyLCR fork once one is configured."
+            "Reinstall FLARE-BB to restore its pinned pyLCR dependency."
         ) from error
     return pyLCR

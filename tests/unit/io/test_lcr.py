@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import timedelta
+import sys
 from types import SimpleNamespace
 
 import pytest
@@ -29,7 +30,9 @@ def test_light_curve_request_validation() -> None:
         request.validate()
 
 
-def test_import_pylcr_missing_dependency() -> None:
+def test_import_pylcr_missing_dependency(monkeypatch) -> None:
+    monkeypatch.setitem(sys.modules, "pyLCR", None)
+
     with pytest.raises(MissingPyLcrError):
         import_pylcr()
 

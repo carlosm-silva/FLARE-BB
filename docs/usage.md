@@ -31,7 +31,7 @@ For a smoke test that does not require Fermi LCR access:
 python scripts/generate_kde.py --sample-data --bins 128
 ```
 
-For real Fermi data, place the 4FGL catalog at `data/catalogs/gll_psc_v32.fit` and install a pinned `pyLCR` fork before running without `--sample-data`.
+For real Fermi data, place the 4FGL catalog at `data/catalogs/gll_psc_v32.fit`. The project installation includes the commit-pinned `pyLCR` fork required when running without `--sample-data`.
 
 ## Flux Distributions
 

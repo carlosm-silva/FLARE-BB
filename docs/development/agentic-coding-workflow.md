@@ -9,14 +9,16 @@ milestones while implementing each milestone through small, independently review
 Use four levels of planning:
 
 ```text
-Roadmap objective
-└── GitHub milestone: user-facing capability
+Roadmap workstream (P0--P7): technical scope
+└── GitHub milestone (M0--M6): user-facing capability
     └── Issue: independently reviewable deliverable
         └── Short-lived branch and pull request
             └── Atomic working commits
 ```
 
-A milestone is not a branch. A milestone may span several pull requests, but each pull request should leave `main`
+P-numbered workstreams define the scientific and technical scope of work. M-numbered milestones are the only progress
+standard: they describe what a user can do when the milestone is complete. A milestone is not a branch and can span
+several workstreams; each pull request should name both its milestone and its primary workstream, and leave `main`
 usable, tested, and scientifically coherent.
 
 ## Pull request cadence
@@ -39,32 +41,37 @@ description deserve the most care because they become the commit on `main`.
 
 ## Milestone sequence
 
-### Milestone 1 — Real-light-curve analysis
+### M0 — Scientific contract — complete
+
+P0 established the tracked terminology, defaults, provenance boundary, and legacy migration map required by all later
+work.
+
+### M1 — Real-light-curve analysis
 
 The first user-facing milestone is complete when a new user can initialize data, load a real Fermi light curve, and
 produce its Bayesian-block representation using only the README.
 
 Suggested pull requests:
 
-1. `docs/scientific-contract` — completed
+1. `M0 / P0 — docs/scientific-contract` — completed
    - Establish terminology, units, paper-backed defaults, and the legacy migration map.
-2. `feat/bayesian-block-analysis`
+2. `M1 / P1 — feat/bayesian-block-analysis` — active
    - Add the pure configuration, result, and analysis API with synthetic and regression tests.
-3. `feat/light-curve-data`
+3. `M1 / P2 — feat/light-curve-data`
    - Add the typed light-curve representation, pyLCR adapter, stable HDF5 schema, and offline fixtures.
-4. `feat/cache-initialization`
+4. `M1 / P2 — feat/cache-initialization`
    - Add initialization and status commands, manifests, checksums, and idempotent caching.
-5. `feat/light-curve-analysis-cli`
+5. `M1 / P2,P7 — feat/light-curve-analysis-cli`
    - Add the analysis command, visualization, analysis-first quickstart, and real-data tutorial.
 
-### Milestone 2 — Reproducible measurement model
+### M2 — Reproducible measurement model
 
 Deliver numerical validation, a versioned artifact schema, runtime spline construction, the bandwidth study, and the
 archived `paper-v1` artifact as separate reviewable changes.
 
 Completion means the empirical posterior can be rebuilt or downloaded, verified, loaded, and evaluated reproducibly.
 
-### Milestone 3 — CPU simulation reference
+### M3 — CPU simulation reference
 
 Separate true-flux events, the NumPy conditional sampler, seeded light-curve simulation, simulation-only flare
 classification, detection metrics, and the tutorial where practical.
@@ -72,7 +79,7 @@ classification, detection metrics, and the tutorial where practical.
 Completion establishes the correctness reference. It does not imply that publication-scale simulation is practical on
 the CPU.
 
-### Milestone 4 — JAX and GPU acceleration
+### M4 — JAX and GPU acceleration
 
 Deliver accelerator support incrementally:
 
@@ -85,10 +92,15 @@ Deliver accelerator support incrementally:
 Do not combine the JAX dependency, simulation rewrite, and publication-scale trial execution in one pull request. Each
 kernel must be validated against the NumPy reference before the next optimization lands.
 
-### Milestone 5 — Trial engine and paper reproduction
+### M5 — Trial engine and paper reproduction
 
 Implement checkpointing, sharding, aggregation, plotting, and the final paper profile separately. The final large run
 should use already-reviewed and merged software; it should not double as development or debugging.
+
+### M6 — Community release
+
+Complete the remaining P7 documentation, contribution and release guidance, citation and archival references, and the
+reproducibility checklist after the functional milestones are stable.
 
 ## Agent task contract
 

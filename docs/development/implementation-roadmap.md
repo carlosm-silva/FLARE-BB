@@ -13,6 +13,21 @@ The long-term product will let scientists:
 The local `/paper` tree remains ignored and private. Its terminology and equations inform implementation, but stable
 conventions will be rewritten into tracked documentation without exposing unpublished paper text.
 
+## Milestone mapping
+
+Milestones describe user-visible delivery progress. The P-numbered sections below are implementation workstreams: a
+workstream may contribute to more than one milestone, and P7 supplies documentation and release work throughout.
+
+| Milestone | User-visible outcome | Supporting workstreams | Status |
+| --- | --- | --- | --- |
+| M0 — Scientific contract | Shared terminology, defaults, and the legacy boundary are tracked. | P0 | Complete |
+| M1 — Real-light-curve analysis | A user can initialize, load, and segment a real light curve. | P1, P2, P7 | Active: P1 started |
+| M2 — Reproducible measurement model | A validated empirical measurement model can be rebuilt or loaded. | P3, P7 | Planned |
+| M3 — CPU simulation reference | Deterministic small-scale simulations are scientifically validated. | P4, P7 | Planned |
+| M4 — JAX/GPU acceleration | Accelerated simulation is available with NumPy parity. | P5, P7 | Planned |
+| M5 — Trial engine and reproduction | Studies resume safely and archived results are reproducible. | P6, P7 | Planned |
+| M6 — Community release | Tutorials, contribution material, releases, and archival references are complete. | P7 | Planned |
+
 ## Progress
 
 P0's terminology, units, established defaults, provenance boundary, and `OLD2`
@@ -21,7 +36,7 @@ and [legacy migration map](migration-map.md). The next implementation slice is
 P1's pure Bayesian-block numerical API; it must consume this contract without
 adding cache, CLI, plotting, or flare-classification behavior.
 
-## Prioritized objectives
+## Implementation workstreams
 
 ### P0 — Scientific contract and migration inventory
 
